@@ -1,0 +1,94 @@
+.support-news {
+  --support-blue: #0040b0;
+
+  padding: var(--spacing-xxl) var(--spacing-l);
+}
+
+.support-news .support-news-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-xl);
+  max-width: var(--grid-container-width);
+  margin: 0 auto;
+}
+
+.support-news .support-news-heading {
+  margin: 0 0 var(--spacing-l);
+  font-size: var(--heading-font-size-l);
+  color: light-dark(var(--color-dark), var(--color-light));
+}
+
+.support-news .support-news-item {
+  padding: var(--spacing-l) 0;
+  border-top: 1px solid light-dark(var(--color-gray-200), var(--color-gray-700));
+}
+
+.support-news .support-news-item:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.support-news .support-news-title {
+  margin: 0 0 var(--spacing-xs);
+  font-size: var(--heading-font-size-xs);
+}
+
+.support-news .support-news-title a {
+  color: light-dark(var(--color-dark), var(--color-light));
+  text-decoration: none;
+}
+
+.support-news .support-news-title a:hover {
+  color: var(--support-blue);
+  text-decoration: underline;
+}
+
+.support-news .support-news-date {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--body-font-size-s);
+
+  /* gray-600/300 keeps small-text contrast >= WCAG AA 4.5:1 on the section bg */
+  color: light-dark(var(--color-gray-600), var(--color-gray-300));
+}
+
+.support-news .support-news-summary {
+  margin: 0;
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
+  color: light-dark(var(--color-gray-700), var(--color-gray-300));
+}
+
+.support-news .support-news-resources {
+  padding: var(--spacing-l);
+  background-color: light-dark(var(--color-gray-100), var(--color-gray-900));
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.support-news .support-news-resources-heading {
+  margin: 0 0 var(--spacing-m);
+  font-size: var(--heading-font-size-xs);
+  color: light-dark(var(--color-dark), var(--color-light));
+}
+
+.support-news .support-news-resources ul {
+  margin: 0;
+  padding-left: var(--spacing-l);
+}
+
+.support-news .support-news-resources a {
+  color: var(--support-blue);
+}
+
+@media (width <= 800px) {
+  .support-news .support-news-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .support-news * {
+    transition: none !important;
+  }
+}

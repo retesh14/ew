@@ -1,0 +1,89 @@
+.partner-cards {
+  --partner-blue: #0070f2;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-l);
+  max-width: var(--grid-container-width);
+  margin: var(--spacing-xxl) auto;
+  padding: 0 var(--spacing-l);
+}
+
+.partner-cards .partner-card {
+  display: flex;
+  background-color: light-dark(var(--color-light), var(--color-gray-900));
+  border: 1px solid light-dark(var(--color-gray-200), var(--color-gray-700));
+  border-radius: 12px;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.partner-cards .partner-card:hover {
+  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 12%);
+  transform: translateY(-2px);
+}
+
+.partner-cards .partner-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+  width: 100%;
+  padding: var(--spacing-xl);
+}
+
+.partner-cards .partner-card-title {
+  margin: 0;
+  font-size: var(--heading-font-size-s);
+  color: light-dark(var(--color-dark), var(--color-light));
+}
+
+.partner-cards .partner-card-desc {
+  margin: 0;
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
+  color: light-dark(var(--color-gray-700), var(--color-gray-300));
+}
+
+.partner-cards .partner-card-cta-wrap {
+  margin: var(--spacing-xs) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-s) var(--spacing-l);
+}
+
+.partner-cards .partner-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--partner-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.partner-cards .partner-card-cta:hover {
+  text-decoration: underline;
+}
+
+/* First CTA in a card reads as the primary action */
+.partner-cards .partner-card-cta-wrap:first-of-type .partner-card-cta:first-child {
+  padding: 8px 18px;
+  border-radius: 6px;
+  background-color: var(--partner-blue);
+  color: #fff;
+}
+
+.partner-cards .partner-card-cta-wrap:first-of-type .partner-card-cta:first-child:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+@media (width <= 700px) {
+  .partner-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-cards * {
+    transition: none !important;
+  }
+}

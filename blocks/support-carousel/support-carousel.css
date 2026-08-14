@@ -1,0 +1,243 @@
+.support-carousel {
+  --support-blue: #0040b0;
+  --sc-card-w: 300px;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--spacing-s);
+  max-width: var(--grid-container-width);
+  margin: var(--spacing-xl) auto;
+}
+
+.support-carousel .support-carousel-viewport {
+  overflow: hidden;
+}
+
+.support-carousel .support-carousel-track {
+  display: flex;
+  gap: var(--spacing-l);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-bottom: var(--spacing-xs);
+}
+
+.support-carousel .support-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.support-carousel .support-carousel-slide {
+  flex: 0 0 var(--sc-card-w);
+  scroll-snap-align: start;
+}
+
+.support-carousel .support-carousel-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: light-dark(var(--color-light), var(--color-gray-900));
+  border: 1px solid light-dark(var(--color-gray-200), var(--color-gray-700));
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.support-carousel .support-carousel-card:hover {
+  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 12%);
+  transform: translateY(-2px);
+}
+
+.support-carousel .support-carousel-image {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: light-dark(var(--color-gray-100), var(--color-gray-800));
+}
+
+.support-carousel .support-carousel-image img,
+.support-carousel .support-carousel-image picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.support-carousel .support-carousel-title {
+  margin: 0;
+  padding: var(--spacing-l) var(--spacing-l) 0;
+  font-size: var(--heading-font-size-xs);
+  color: light-dark(var(--color-dark), var(--color-light));
+}
+
+.support-carousel .support-carousel-desc {
+  margin: var(--spacing-s) 0 0;
+  padding: 0 var(--spacing-l);
+  font-size: var(--body-font-size-s);
+  line-height: var(--body-line-height);
+  color: light-dark(var(--color-gray-700), var(--color-gray-300));
+}
+
+.support-carousel .support-carousel-cta {
+  margin-top: auto;
+  padding: var(--spacing-m) var(--spacing-l) var(--spacing-l);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--support-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.support-carousel .support-carousel-cta:hover {
+  text-decoration: underline;
+}
+
+.support-carousel .support-carousel-card:hover .support-carousel-arrow {
+  transform: translateX(4px);
+}
+
+.support-carousel .support-carousel-arrow {
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Prev/Next buttons */
+.support-carousel .support-carousel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid light-dark(var(--color-gray-300), var(--color-gray-600));
+  border-radius: 50%;
+  background-color: light-dark(var(--color-light), var(--color-gray-800));
+  color: var(--support-blue);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.support-carousel .support-carousel-btn:hover:not(:disabled) {
+  background-color: light-dark(var(--color-gray-100), var(--color-gray-700));
+}
+
+.support-carousel .support-carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Dots */
+.support-carousel .support-carousel-dots {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-s);
+  margin-top: var(--spacing-m);
+}
+
+.support-carousel .support-carousel-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: light-dark(var(--color-gray-300), var(--color-gray-600));
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.support-carousel .support-carousel-dot.is-active {
+  background-color: var(--support-blue);
+}
+
+@media (width >= 900px) {
+  .support-carousel:not(.support-carousel-wide) {
+    /* 4 cards per view (matches the real SAP Additional Resources carousel) */
+    --sc-card-w: calc((100% - 3 * var(--spacing-l)) / 4);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * Wide / editorial variant — the "Features" spotlight carousel.
+ * One slide per view: text on the left, large image on the right, no card
+ * chrome (matches support.sap.com carouselWrapper).
+ * -------------------------------------------------------------------------- */
+.support-carousel-wide {
+  --sc-card-w: 100%;
+}
+
+.support-carousel-wide .support-carousel-slide {
+  scroll-snap-align: start;
+}
+
+.support-carousel-wide .support-carousel-card {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-xxl);
+  background: none;
+  border: 0;
+  border-radius: 0;
+}
+
+.support-carousel-wide .support-carousel-card:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.support-carousel-wide .support-carousel-body {
+  flex: 1 1 50%;
+  min-width: 0;
+  order: 1;
+}
+
+.support-carousel-wide .support-carousel-image {
+  flex: 0 0 42%;
+  order: 2;
+  align-self: stretch;
+  aspect-ratio: auto;
+  border-radius: 4px;
+  min-height: 320px;
+}
+
+.support-carousel-wide .support-carousel-title {
+  padding: 0 0 var(--spacing-s);
+  font-size: var(--heading-font-size-m);
+}
+
+.support-carousel-wide .support-carousel-desc {
+  padding: 0;
+  margin: 0 0 var(--spacing-s);
+  font-size: var(--body-font-size-m);
+}
+
+.support-carousel-wide .support-carousel-cta {
+  padding: var(--spacing-s) 0 0;
+}
+
+@media (width <= 800px) {
+  .support-carousel-wide .support-carousel-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-l);
+  }
+
+  .support-carousel-wide .support-carousel-image {
+    order: -1;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (width <= 600px) {
+  .support-carousel {
+    --sc-card-w: 82%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .support-carousel * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

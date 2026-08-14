@@ -1,0 +1,89 @@
+.partner-subnav {
+  --partner-blue: #0070f2;
+
+  border-bottom: 1px solid light-dark(var(--color-gray-200), var(--color-gray-700));
+  background-color: light-dark(var(--color-light), var(--color-gray-900));
+}
+
+.partner-subnav .partner-subnav-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-m) var(--spacing-l);
+  max-width: var(--grid-container-width);
+  margin: 0 auto;
+  padding: var(--spacing-s) var(--spacing-l);
+}
+
+.partner-subnav .partner-subnav-title {
+  font-weight: 700;
+  font-size: var(--body-font-size-l);
+  color: light-dark(var(--color-dark), var(--color-light));
+}
+
+.partner-subnav .partner-subnav-nav {
+  flex: 1;
+}
+
+.partner-subnav .partner-subnav-list {
+  display: flex;
+
+  /* Keep all tabs on one line (source shows them inline); the nav can grow to
+   * fit rather than dropping the last item ("Become a partner") to a 2nd row. */
+  flex-wrap: nowrap;
+  gap: var(--spacing-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.partner-subnav .partner-subnav-list li {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.partner-subnav .partner-subnav-link {
+  display: inline-block;
+  padding: var(--spacing-xs) 0;
+  color: light-dark(var(--color-gray-700), var(--color-gray-300));
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.partner-subnav .partner-subnav-link:hover {
+  color: var(--partner-blue);
+}
+
+.partner-subnav .partner-subnav-link.is-current {
+  color: light-dark(var(--color-dark), var(--color-light));
+  border-bottom-color: var(--partner-blue);
+  font-weight: 600;
+}
+
+.partner-subnav .partner-subnav-login {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 6px;
+  background-color: var(--partner-blue);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.partner-subnav .partner-subnav-login:hover {
+  opacity: 0.9;
+}
+
+@media (width <= 700px) {
+  .partner-subnav .partner-subnav-inner {
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-subnav * {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,82 @@
+.partner-hero {
+  --partner-blue: #0040b0;
+
+  /* Full-width SAP-blue hero banner to match sap.com/partners/login */
+  background-color: var(--partner-blue);
+}
+
+.partner-hero .partner-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+  max-width: var(--grid-container-width);
+  margin: 0 auto;
+  padding: var(--spacing-xxl) var(--spacing-l);
+}
+
+.partner-hero .partner-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+}
+
+.partner-hero .partner-hero-heading {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #fff;
+}
+
+.partner-hero .partner-hero-text {
+  margin: 0;
+  font-size: var(--body-font-size-l);
+  line-height: var(--body-line-height);
+  color: rgb(255 255 255 / 90%);
+}
+
+/* White button with blue label, matching the source hero CTA */
+.partner-hero .partner-hero-cta {
+  align-self: flex-start;
+  display: inline-block;
+  margin-top: var(--spacing-s);
+  padding: 12px 24px;
+  border-radius: 6px;
+  background-color: #fff;
+  color: var(--partner-blue);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.partner-hero .partner-hero-cta:hover {
+  opacity: 0.9;
+}
+
+.partner-hero .partner-hero-media {
+  overflow: hidden;
+}
+
+.partner-hero .partner-hero-media img,
+.partner-hero .partner-hero-media picture {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (width <= 800px) {
+  .partner-hero .partner-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .partner-hero .partner-hero-media {
+    order: -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-hero * {
+    transition: none !important;
+  }
+}

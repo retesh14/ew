@@ -1,0 +1,61 @@
+.support-feedback {
+  --support-blue: #0040b0;
+
+  padding: var(--spacing-xl) var(--spacing-l);
+  background-color: light-dark(var(--color-gray-100), var(--color-gray-900));
+}
+
+.support-feedback .support-feedback-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-m);
+  max-width: var(--grid-container-width);
+  margin: 0 auto;
+}
+
+.support-feedback .support-feedback-heading {
+  margin: 0;
+  font-size: var(--heading-font-size-xs);
+  font-weight: 500;
+  color: light-dark(var(--color-dark), var(--color-light));
+}
+
+.support-feedback .support-feedback-actions {
+  display: flex;
+  gap: var(--spacing-s);
+}
+
+.support-feedback .support-feedback-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: 1px solid var(--support-blue);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--support-blue);
+  font-family: inherit;
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.support-feedback .support-feedback-btn:hover {
+  background-color: var(--support-blue);
+  color: #fff;
+}
+
+.support-feedback .support-feedback-thanks {
+  margin: 0;
+  font-weight: 600;
+  color: var(--support-blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .support-feedback * {
+    transition: none !important;
+  }
+}

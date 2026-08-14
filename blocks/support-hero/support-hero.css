@@ -1,0 +1,99 @@
+.support-hero {
+  /* Matches the live SAP Support Portal blue panel */
+  --support-blue: #0040b0;
+
+  background-color: var(--support-blue);
+  color: #fff;
+  padding: var(--spacing-xxl) var(--spacing-l);
+}
+
+.support-hero .support-hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.support-hero .support-hero-heading {
+  margin: 0 0 var(--spacing-m);
+  color: #fff;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.support-hero .support-hero-message {
+  margin: 0 auto var(--spacing-l);
+  max-width: 620px;
+  color: #fff;
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
+}
+
+.support-hero .support-hero-form {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-s);
+  width: 100%;
+  max-width: 684px;
+  margin: 0 auto;
+  padding: 4px 4px 4px 8px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 24px;
+}
+
+.support-hero .support-hero-input {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--color-dark);
+  font-family: inherit;
+  font-size: var(--body-font-size-m);
+}
+
+.support-hero .support-hero-input::placeholder {
+  color: var(--color-gray-500);
+}
+
+.support-hero .support-hero-input:focus {
+  outline: none;
+}
+
+.support-hero .support-hero-form:focus-within {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.support-hero .support-hero-submit {
+  flex: 0 0 auto;
+  height: 40px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 20px;
+  background-color: var(--support-blue);
+  color: #fff;
+  font-family: inherit;
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.support-hero .support-hero-submit:hover {
+  opacity: 0.9;
+}
+
+@media (width <= 600px) {
+  .support-hero .support-hero-heading {
+    font-size: var(--heading-font-size-l);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .support-hero * {
+    transition: none !important;
+  }
+}
