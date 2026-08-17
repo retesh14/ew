@@ -532,6 +532,10 @@ header .action-wrapper.login .login-link {
   height: var(--header-height);
   color: var(--sap-text, #1d2d3e);
   text-decoration: none;
+
+  /* icon-only: hide the text label but keep it for screen readers */
+  font-size: 0;
+  white-space: nowrap;
   overflow: hidden;
 }
 
