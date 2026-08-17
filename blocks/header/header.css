@@ -496,3 +496,100 @@ header .action-wrapper button:hover {
     align-items: center;
   }
 }
+
+/* -----------------------------------------------------------------------------
+ * Header actions — search + login (iteration 1).
+ * Search: icon button that expands an inline search field. Login: avatar icon.
+ * -------------------------------------------------------------------------- */
+header .actions-section .action-wrapper.search,
+header .actions-section .action-wrapper.login {
+  position: relative;
+}
+
+/* icon glyphs via mask so they inherit currentColor and hover to SAP blue */
+header .action-wrapper.search button::before,
+header .action-wrapper.login .login-link::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-color: currentcolor;
+  -webkit-mask: var(--hdr-icon) center / contain no-repeat; /* stylelint-disable-line property-no-vendor-prefix -- Safari */
+  mask: var(--hdr-icon) center / contain no-repeat;
+}
+
+header .action-wrapper.search button {
+  --hdr-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.32l5.4 5.39 1.4-1.42-5.38-5.38A8 8 0 0 0 10 2m0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12"/></svg>');
+}
+
+header .action-wrapper.login .login-link {
+  --hdr-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10m0 2c-5.33 0-8 2.67-8 5v3h16v-3c0-2.33-2.67-5-8-5"/></svg>');
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: var(--header-height);
+  color: var(--sap-text, #1d2d3e);
+  text-decoration: none;
+  overflow: hidden;
+}
+
+header .action-wrapper.login .login-link:hover {
+  color: var(--sap-blue);
+}
+
+/* Expanding search field (opens under the icon on desktop, inline on mobile) */
+header .actions-section .search.menu {
+  display: none;
+}
+
+header .actions-section.is-open .search.menu {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-s);
+  background-color: var(--sap-header-bg, #f5f6f7);
+  border: 1px solid #e5e5e5;
+}
+
+header .header-search-input {
+  flex: 1;
+  min-width: 220px;
+  height: 40px;
+  padding: 0 var(--spacing-m);
+  border: 1px solid #c9cccf;
+  border-radius: 20px;
+  font: inherit;
+  color: var(--sap-text, #1d2d3e);
+  background-color: #fff;
+}
+
+header .header-search-submit {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: var(--sap-blue, #0070f2);
+
+  --hdr-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="white" d="M10 2a8 8 0 1 0 4.9 14.32l5.4 5.39 1.4-1.42-5.38-5.38A8 8 0 0 0 10 2m0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12"/></svg>');
+
+  background-image: var(--hdr-icon);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+}
+
+/* Desktop: float the opened search box below the icon so it doesn't reflow the bar */
+@media (width >= 900px) {
+  header .actions-section.is-open .search.menu {
+    position: absolute;
+    top: var(--header-height);
+    right: 0;
+    z-index: 1001;
+    min-width: 320px;
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 12%);
+  }
+}

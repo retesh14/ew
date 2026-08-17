@@ -155,15 +155,88 @@ function decorateNavToggle(btn) {
   });
 }
 
+// SAP for Me support search endpoint — same target the support hero uses, so
+// the header search behaves like the on-page support search.
+const SEARCH_BASE = 'https://me.sap.com/servicessupport/search/';
+
+function decorateSearch(btn) {
+  const section = btn.closest('.section');
+  btn.ariaExpanded = 'false';
+  btn.setAttribute('aria-label', 'Search');
+  menuTriggers.set(section, btn);
+  section.addEventListener('keydown', menuKeydown);
+  section.addEventListener('focusout', menuFocusout);
+
+  btn.addEventListener('click', () => {
+    let box = section.querySelector('.search.menu');
+    if (!box) {
+      const input = document.createElement('input');
+      input.className = 'header-search-input';
+      input.type = 'search';
+      input.name = 'q';
+      input.placeholder = 'Search SAP Support';
+      input.setAttribute('aria-label', 'Search SAP Support');
+      input.autocomplete = 'off';
+
+      const go = document.createElement('button');
+      go.type = 'submit';
+      go.className = 'header-search-submit';
+      go.setAttribute('aria-label', 'Submit search');
+
+      box = document.createElement('form');
+      box.className = 'search menu';
+      box.setAttribute('role', 'search');
+      box.append(input, go);
+      box.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const q = input.value.trim();
+        if (!q) { input.focus(); return; }
+        const url = `${SEARCH_BASE}${encodeURIComponent(JSON.stringify({ q, tab: 'All' }))}`;
+        window.open(url, '_blank', 'noopener');
+      });
+
+      const content = document.createElement('div');
+      content.className = 'block-content';
+      content.append(box);
+      section.append(content);
+    }
+    toggleMenu(section);
+    if (section.classList.contains('is-open')) {
+      section.querySelector('.header-search-input')?.focus();
+    }
+  });
+}
+
+function decorateLogin(link) {
+  // Login stays a plain icon link that opens SAP for Me, no menu behaviour.
+  link.href = 'https://me.sap.com/home';
+  link.setAttribute('aria-label', 'Log in');
+  link.setAttribute('target', '_blank');
+  link.setAttribute('rel', 'noopener');
+}
+
 const HEADER_ACTIONS = [
+  { name: 'search', path: '/tools/widgets/search', decorate: decorateSearch },
+  { name: 'login', path: '/tools/widgets/login', decorate: decorateLogin, keepLink: true },
   { name: 'scheme', path: '/tools/widgets/scheme', decorate: decorateScheme },
   { name: 'language', path: '/tools/widgets/language', decorate: decorateLanguage },
   { name: 'nav-toggle', path: '/tools/widgets/toggle', decorate: decorateNavToggle },
 ];
 
-function decorateAction(header, { name, path, decorate }) {
+function decorateAction(header, { name, path, decorate, keepLink }) {
   const link = header.querySelector(`[href*="${path}"]`);
   if (!link) return;
+
+  // Some actions (e.g. login) stay as an anchor; just tag + decorate in place.
+  if (keepLink) {
+    const wrapper = document.createElement('div');
+    wrapper.className = `action-wrapper ${name}`;
+    link.parentElement.parentElement.replaceChild(wrapper, link.parentElement);
+    wrapper.append(link);
+    link.classList.add(`${name}-link`);
+    decorate(link);
+    return;
+  }
 
   const icon = link.querySelector('.icon');
   const text = link.textContent;
