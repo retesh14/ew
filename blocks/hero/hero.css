@@ -223,3 +223,112 @@
     }
   }
 }
+
+/* -----------------------------------------------------------------------------
+ * Hero `promo` variant — SAP Connect promo.
+ * Authored per author-kit contract: two rows (background image row + foreground
+ * text row). Base hero handles text-left/image-right via `hero-text-start`;
+ * this variant only restyles: navy→blue gradient, contained right-side graphic,
+ * and a pill CTA.
+ * -------------------------------------------------------------------------- */
+.hero.promo {
+  --min-height: 380px;
+
+  background: linear-gradient(100deg, #060f22 0%, #0b1e42 42%, #163a86 100%);
+  color: #fff;
+}
+
+/* Foreground: text column only (no gradient overlay — the block bg is the gradient). */
+.hero.promo .hero-foreground {
+  background: none;
+  align-items: center;
+}
+
+.hero.promo .hero-heading {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.hero.promo .fg-text p {
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+.hero.promo .fg-text a {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 28px;
+  background: #fff;
+  color: #0a2a6b;
+  border-radius: 4px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero.promo .fg-text a:hover {
+  background: #eef3ff;
+}
+
+/* Background graphic: contained on the right (not full-bleed cover). Hidden on
+ * small screens so the copy stays readable over the gradient. */
+.hero.promo .hero-background {
+  display: none;
+}
+
+/* Neutralise the base hero's white "quiet-background" helper so the promo
+ * gradient (set on .hero.promo) shows through behind the graphic + text. */
+.hero.promo .hero-background > div {
+  background: none;
+}
+
+@media (width >= 600px) {
+  .hero.promo .hero-background {
+    display: block;
+  }
+
+  .hero.promo .hero-background picture {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: min(50%, 620px);
+    margin-right: max(0px, calc((100% - var(--grid-container-width, 1200px)) / 2));
+  }
+
+  .hero.promo .hero-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center right;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+ * Hero `purple` modifier (pairs with `promo`) — SAP Events Finder look:
+ * solid SAP purple + magenta chevron pattern, transparent silhouette bottom-right.
+ * -------------------------------------------------------------------------- */
+.hero.promo.purple {
+  --sap-purple: #a100ff;
+  --sap-magenta: #e100c3;
+
+  background:
+    /* repeating chevron flecks */
+    repeating-linear-gradient(135deg,
+      transparent 0 46px,
+      rgb(225 0 195 / 22%) 46px 58px,
+      transparent 58px 104px),
+    var(--sap-purple);
+}
+
+@media (width >= 600px) {
+  /* silhouette sits flush to the bottom, larger than the contained promo graphic */
+  .hero.promo.purple .hero-background picture {
+    inset: auto 0 0 auto;
+    width: min(46%, 560px);
+    height: 100%;
+  }
+
+  .hero.promo.purple .hero-background img {
+    object-fit: contain;
+    object-position: right bottom;
+  }
+}
