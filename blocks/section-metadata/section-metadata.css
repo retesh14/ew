@@ -236,3 +236,37 @@
     grid-template-columns: repeat(var(--grid-size), 1fr);
   }
 }
+/* -----------------------------------------------------------------------------
+ * `anchorlinks` — render a section's list as a centered horizontal row of
+ * plain text links (used as an in-page jump nav). `border-sm` / `border-lg`
+ * add a hairline rule below the section.
+ * -------------------------------------------------------------------------- */
+.section.anchorlinks {
+  .default-content ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-l, 24px) var(--spacing-xl, 32px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .default-content li {
+    margin: 0;
+    font-weight: 700;
+    color: var(--sap-text, #1d2d3e);
+    white-space: nowrap;
+  }
+
+  .default-content li a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .default-content li a:hover {
+    color: var(--sap-blue, #0070f2);
+  }
+}
+
+.section.border-sm { border-bottom: 1px solid #e5e5e5; }
+.section.border-lg { border-bottom: 2px solid #d0d3d7; }
