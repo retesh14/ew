@@ -1,0 +1,94 @@
+/* Secondary (contextual) nav — thin SAP-style bar:
+ * bold section title (left) · divider · contextual links, underlined at the bar's base. */
+.secondary-nav {
+  --sap-blue: #0070f2;
+  --sap-text: #1d2d3e;
+  --sap-muted: #475e75;
+
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 0.875rem;
+}
+
+.secondary-nav-inner {
+  display: flex;
+  align-items: stretch;
+  gap: var(--spacing-m, 16px);
+  max-width: var(--grid-container-width, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--spacing-m, 16px);
+  min-height: 48px;
+}
+
+/* Section title. */
+.secondary-nav-title {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--sap-text);
+  white-space: nowrap;
+}
+
+/* Divider between title and links. */
+.secondary-nav nav {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  padding-left: var(--spacing-l, 24px);
+}
+
+.secondary-nav nav::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 20px;
+  background: #c8cdd3;
+}
+
+.secondary-nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: var(--spacing-l, 24px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.secondary-nav-list li {
+  display: flex;
+  margin: 0;
+}
+
+.secondary-nav-list a {
+  display: flex;
+  align-items: center;
+  color: var(--sap-muted);
+  font-weight: 400;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.secondary-nav-list a:hover,
+.secondary-nav-list a[aria-current="page"] {
+  color: var(--sap-blue);
+  border-bottom-color: var(--sap-blue);
+}
+
+/* small screens: scroll instead of wrap */
+@media (width < 700px) {
+  .secondary-nav-inner {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .secondary-nav-list {
+    flex-wrap: nowrap;
+  }
+}

@@ -2,9 +2,9 @@
   --spacing-default: var(--spacing-l);
 
   overflow-wrap: break-word;
-  box-shadow: 0 1px 6px 0 rgb(0 0 0 / 12%);
+  border: 1px solid #d9dcdf;
   overflow: hidden;
-  background-color: light-dark(var(--color-gray-100), var(--color-gray-900));
+  background-color: #fff;
   color: light-dark(var(--color-dark), var(--color-light));
   transition: all 0.25s ease-in-out;
 
@@ -52,15 +52,36 @@
   }
 
   .card-cta-container {
+    --sap-blue: #0070f2;
+
     padding: 0 var(--spacing-default) var(--spacing-default) var(--spacing-default);
     margin: 0;
     display: flex;
-    justify-content: end;
+    justify-content: flex-start;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--sap-blue);
+      font-weight: 400;
+      text-decoration: none;
+    }
+
+    a::after {
+      content: '\203A';
+      font-size: 1.15em;
+      line-height: 1;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 
   &:not(.quiet):hover {
-    transform: scale(1.005);
-    box-shadow: 0 2px 8px 0 rgb(0 0 0 / 16%);
+    border-color: #c0c4c8;
+    box-shadow: 0 2px 8px 0 rgb(0 0 0 / 10%);
 
     picture {
       opacity: 1;

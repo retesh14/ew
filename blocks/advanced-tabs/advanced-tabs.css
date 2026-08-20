@@ -35,3 +35,8 @@
     }
   }
 }
+
+/* `left` variant — left-align the tab list instead of centering (SAP finder look). */
+.advanced-tabs.left .tab-list {
+  justify-content: flex-start;
+}

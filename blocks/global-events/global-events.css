@@ -1,0 +1,55 @@
+/*
+ * global-events — sticky intro column beside a scrolling card grid.
+ * The block adopts the next section so both columns live in one grid; that
+ * shared scroll context is what lets the intro use position: sticky.
+ */
+.global-events-layout {
+  display: grid;
+  gap: var(--spacing-xl, 32px);
+  max-width: var(--grid-container-width, 1200px);
+  margin-inline: auto;
+}
+
+/* Intro column: title, text, links. */
+.global-events-intro > *:first-child { margin-top: 0; }
+.global-events-intro > *:last-child { margin-bottom: 0; }
+
+.global-events-links {
+  list-style: none;
+  margin: var(--spacing-m, 16px) 0 0;
+  padding: 0;
+}
+
+.global-events-links li { margin: 0 0 8px; }
+
+.global-events-links a {
+  color: var(--sap-blue, #0070f2);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.global-events-links a:hover { text-decoration: underline; }
+
+/* Adopted cards section — strip its standalone section chrome so it sits
+ * cleanly inside the layout cell; its inner .block-content grid is untouched. */
+.global-events-cards {
+  padding: 0;
+}
+
+.global-events-cards.container .block-content {
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* Single column on small screens — no sticky, natural stacking. */
+@media (width >= 900px) {
+  .global-events-layout {
+    grid-template-columns: minmax(260px, 340px) 1fr;
+    align-items: start;
+  }
+
+  .global-events-intro {
+    position: sticky;
+    top: calc(var(--header-height, 64px) + var(--spacing-l, 24px));
+  }
+}
