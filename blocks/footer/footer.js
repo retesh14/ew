@@ -11,6 +11,15 @@ export default async function init(el) {
   const { locale } = getConfig();
   const footerMeta = getMetadata('footer');
   const path = footerMeta || FOOTER_PATH;
+
+  // Per-section footer theme: pages under /events use the dark (black) footer to
+  // match sap.com/events; everything else (support, partner, home) keeps the
+  // default light-grey footer. Path-based so no per-page authoring is needed.
+  const pagePath = window.location.pathname.replace(locale.prefix, '');
+  if (pagePath === '/events' || pagePath.startsWith('/events/')) {
+    el.classList.add('footer-events');
+  }
+
   try {
     const fragment = await loadFragment(`${locale.prefix}${path}`);
     fragment.classList.add('footer-content');

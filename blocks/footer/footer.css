@@ -170,3 +170,41 @@ footer .section-copyright p {
     grid-row: 1;
   }
 }
+
+/* -----------------------------------------------------------------------------
+ * Events theme — dark (black) footer, matching sap.com/events (#222 background,
+ * light text). Scoped to footer.footer-events, which footer.js adds only on
+ * pages under /events. Support/partner/home keep the light-grey default above.
+ * -------------------------------------------------------------------------- */
+footer.footer-events {
+  --sap-footer-bg: #222;
+  --sap-footer-fg: #d9dce0;
+  --sap-footer-muted: #a7adb4;
+  --sap-footer-heading: #ffffff;
+  --sap-footer-link: #d9dce0;
+  --sap-footer-blue: #4db1ff;
+
+  border-top: 0;
+}
+
+/* Section dividers were light-grey; soften them for the dark background */
+footer.footer-events .footer-content > .section:first-child,
+footer.footer-events .section-copyright {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* The brand wordmark is SAP blue on light; use white on the dark footer */
+footer.footer-events .brand-section a,
+footer.footer-events .footer-content > .section:first-child p:first-child a {
+  color: #fff;
+}
+
+/* Social glyphs: light by default, brand-blue on hover */
+footer.footer-events .section-legal a::before {
+  background-color: var(--sap-footer-link);
+}
+
+footer.footer-events .section-legal a:hover::before,
+footer.footer-events .section-legal a:focus::before {
+  background-color: var(--sap-footer-blue);
+}
