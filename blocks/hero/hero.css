@@ -332,3 +332,15 @@
     object-position: right bottom;
   }
 }
+
+/* -----------------------------------------------------------------------------
+ * `scrim` — dark, left-weighted gradient over the background image so
+ * light-heavy photos keep white foreground text legible (pairs with
+ * hero-text-start on a `large dark` cover hero).
+ * -------------------------------------------------------------------------- */
+.hero.scrim .hero-background picture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(6 15 34 / 88%) 0%, rgb(6 15 34 / 62%) 40%, rgb(6 15 34 / 12%) 100%);
+}
