@@ -1,0 +1,84 @@
+/*
+ * connect template — dark/black event page (SAP Connect style).
+ * Sets the whole page to the dark color scheme so sections default to
+ * black background + light text. Individual sections can still override
+ * via section-metadata Background (e.g. a lighter tinted section).
+ */
+
+body.connect-template {
+  color-scheme: dark;
+  background-color: #0b0f14; /* near-black, softer than pure #000 for text contrast */
+  --color-background: #0b0f14;
+  --color-text: var(--color-light);
+}
+
+/* Default text/heading color across the dark page */
+body.connect-template main {
+  color: var(--color-light);
+}
+
+body.connect-template main h1,
+body.connect-template main h2,
+body.connect-template main h3,
+body.connect-template main h4 {
+  color: var(--color-light);
+}
+
+/* Sections are transparent so the black body shows through; a section can
+   opt into a lighter panel with section-metadata Style: shaded / Background. */
+body.connect-template main > .section {
+  background-color: transparent;
+}
+
+/* A shaded panel option for sections that need separation on the dark page */
+body.connect-template main > .section.shaded {
+  background-color: #12171c;
+}
+
+/* Cards on the dark page: subtle raised panel instead of white */
+body.connect-template .card {
+  background-color: #12171c;
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 12px;
+  overflow: clip;
+}
+
+body.connect-template .card .card-content-container {
+  color: var(--color-light);
+}
+
+body.connect-template .card h3 {
+  color: var(--color-light);
+}
+
+/* Section background IMAGES (line-of-business tiles, hero) get a dark
+   overlay so light text stays readable — matches the source gradient. */
+body.connect-template main > .section.has-background {
+  position: relative;
+  color: var(--color-light);
+}
+
+body.connect-template main > .section.has-background > .section-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(11 15 20 / 20%) 0%,
+    rgb(11 15 20 / 85%) 100%
+  );
+}
+
+/* Sponsor logos row — keep logos legible on dark (source shows them on light chips) */
+body.connect-template .sponsors-logos img {
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+/* Section heading rhythm to echo the source's generous spacing */
+body.connect-template main > .section > .default-content-wrapper > h2 {
+  font-size: var(--heading-font-size-xxl, 2.5rem);
+  line-height: 1.1;
+  margin-bottom: 0.5em;
+}
