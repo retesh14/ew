@@ -307,7 +307,11 @@ export function decorateHeaderContent(header) {
  */
 export default async function init(el) {
   const headerMeta = getMetadata('header');
-  const path = headerMeta || HEADER_PATH;
+  // Path-based chrome: /vep event pages load VEP's own (editable) header copy
+  // from vep-fragment. Mirrors the footer block's path-based theme selection.
+  const pagePath = window.location.pathname.replace(locale.prefix, '');
+  const vepHeader = pagePath === '/vep' || pagePath.startsWith('/vep/');
+  const path = headerMeta || (vepHeader ? '/vep-fragment/header' : HEADER_PATH);
   try {
     const fragment = await loadFragment(`${locale.prefix}${path}`);
     fragment.classList.add('header-content');

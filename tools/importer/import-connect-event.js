@@ -200,7 +200,10 @@ export default {
     rewriteMediaToVepMedia(main);
 
     // Apply the dark event page theme by adding a "Template: connect" row to the
-    // Metadata block that createMetadata just appended (last table in main).
+    // Metadata block createMetadata appended (last table in main). The VEP
+    // header/footer fragments are selected path-based inside the header/footer
+    // blocks (see blocks/header + blocks/footer), not via metadata — this repo
+    // uses header/footer metadata as the block class name, not a fragment path.
     const tables = main.querySelectorAll('table');
     const metaTable = tables[tables.length - 1];
     if (metaTable) {

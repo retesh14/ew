@@ -31,6 +31,8 @@ const pages = [
   { file: 'vep-templates/connect-event.plain.html', daPath: 'vep-templates/connect-event' },
   { file: 'vep-fragment/registration-note.plain.html', daPath: 'vep-fragment/registration-note' },
   { file: 'vep-fragment/agenda.plain.html', daPath: 'vep-fragment/agenda' },
+  { file: 'vep-fragment/header.plain.html', daPath: 'vep-fragment/header' },
+  { file: 'vep-fragment/footer.plain.html', daPath: 'vep-fragment/footer' },
 ];
 
 function wrapDoc(inner) {

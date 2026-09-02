@@ -7,6 +7,11 @@
  *   2. content/vep-fragment/registration-note.plain.html
  *        — the shared "Day 2 requires Day 1" registration note, so recurring
  *          boilerplate is edited once and referenced by every event.
+ *   3. content/vep-fragment/{header,footer}.plain.html
+ *        — VEP's own copy of the site chrome, copied from the repo's nav
+ *          fragments. Pages point Header:/Footer: metadata at these so the
+ *          standard header/footer blocks load the VEP copies (which the team
+ *          can customize without touching other pages).
  *
  * Run: node tools/importer/build-vep-template.js
  */
@@ -43,6 +48,24 @@ fs.mkdirSync(path.join(ROOT, 'vep-fragment'), { recursive: true });
 
 fs.writeFileSync(path.join(ROOT, 'vep-templates', 'connect-event.plain.html'), template + '\n');
 fs.writeFileSync(path.join(ROOT, 'vep-fragment', 'registration-note.plain.html'), fragment + '\n');
+
+// VEP chrome — copy the repo's current nav fragments into vep-fragment so the
+// team owns an editable copy. Only (re)write if the source exists and the vep
+// copy is absent, so later manual customization is never clobbered.
+const chrome = [
+  { src: 'fragments/nav/header.plain.html', dst: 'vep-fragment/header.plain.html' },
+  { src: 'fragments/nav/footer.plain.html', dst: 'vep-fragment/footer.plain.html' },
+];
+for (const { src, dst } of chrome) {
+  const srcPath = path.join(ROOT, src);
+  const dstPath = path.join(ROOT, dst);
+  if (fs.existsSync(srcPath) && !fs.existsSync(dstPath)) {
+    fs.copyFileSync(srcPath, dstPath);
+    console.log(`✅ Wrote content/${dst} (copied from ${src})`);
+  } else if (fs.existsSync(dstPath)) {
+    console.log(`↷ content/${dst} exists — left as-is (customizable)`);
+  }
+}
 
 console.log('✅ Wrote content/vep-templates/connect-event.plain.html');
 console.log('✅ Wrote content/vep-fragment/registration-note.plain.html');

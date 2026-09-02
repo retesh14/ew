@@ -10,13 +10,17 @@ const FOOTER_PATH = '/fragments/nav/footer';
 export default async function init(el) {
   const { locale } = getConfig();
   const footerMeta = getMetadata('footer');
-  const path = footerMeta || FOOTER_PATH;
-
-  // Per-section footer theme: pages under /events use the dark (black) footer to
-  // match sap.com/events; everything else (support, partner, home) keeps the
-  // default light-grey footer. Path-based so no per-page authoring is needed.
   const pagePath = window.location.pathname.replace(locale.prefix, '');
-  if (pagePath === '/events' || pagePath.startsWith('/events/')) {
+
+  // Path-based chrome: /vep event pages load VEP's own (editable) footer copy
+  // from vep-fragment; everything else uses the default nav footer.
+  const vepFooter = pagePath === '/vep' || pagePath.startsWith('/vep/');
+  const path = footerMeta || (vepFooter ? '/vep-fragment/footer' : FOOTER_PATH);
+
+  // Per-section footer theme: pages under /events and /vep use the dark (black)
+  // footer to match sap.com/events; everything else (support, partner, home)
+  // keeps the default light-grey footer. Path-based so no per-page authoring.
+  if (pagePath === '/events' || pagePath.startsWith('/events/') || vepFooter) {
     el.classList.add('footer-events');
   }
 
