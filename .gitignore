@@ -11,3 +11,7 @@ helix-importer-ui
 .claude/settings.local.json
 .superpowers
 docs/adr/0000-own-the-page-lifecycle.spicy.md
+
+# VEP migration generated artifacts
+tools/importer/*.bundle.js
+tools/importer/reports/
