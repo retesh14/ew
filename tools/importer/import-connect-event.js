@@ -32,10 +32,20 @@ const VEP_MEDIA_MAP = {
   'https://events.sap.com/adobe/dynamicmedia/deliver/dm-aid--262bbdde-a719-4bf6-a2c6-7f267eb141d0/collibra-logo.jpg': '/vep-media/collibra-logo.png',
 };
 
+// Corrected alt text for sponsor logos — the source page mislabels several
+// (e.g. Google Cloud carried alt="Vass"). Keyed by the local /vep-media/ path.
+const VEP_ALT_FIXES = {
+  '/vep-media/google-cloud.png': 'Google Cloud',
+  '/vep-media/incture-logo.png': 'Incture',
+  '/vep-media/crave-infotech-logo.png': 'Crave Infotech',
+  '/vep-media/collibra-logo.png': 'Collibra',
+  '/vep-media/tricentis-logo-freelogovectors-net.png': 'Tricentis',
+};
+
 /**
  * Rewrite every <img>/<source> whose URL matches a Dynamic Media asset to its
  * local /vep-media/ copy. Query strings (width/quality/preferwebp) are dropped —
- * the local file is a single rendition.
+ * the local file is a single rendition. Also corrects known bad sponsor alts.
  */
 function rewriteMediaToVepMedia(main) {
   main.querySelectorAll('img, source').forEach((el) => {
@@ -45,6 +55,14 @@ function rewriteMediaToVepMedia(main) {
       const base = val.split('?')[0];
       if (VEP_MEDIA_MAP[base]) el.setAttribute(attr, VEP_MEDIA_MAP[base]);
     });
+    // Fix mislabeled sponsor alt text once the src points at /vep-media/.
+    if (el.tagName === 'IMG') {
+      const fix = VEP_ALT_FIXES[el.getAttribute('src')];
+      if (fix) {
+        el.setAttribute('alt', fix);
+        el.removeAttribute('title'); // stale source title (e.g. "Crave-Logo")
+      }
+    }
   });
 }
 
