@@ -61,9 +61,19 @@ Boilerplate that repeats across events lives in `/vep-fragment/` and is referenc
 Editing the fragment updates every event that references it.
 
 - `/vep-fragment/registration-note` — the "Day 2 requires Day 1" note under the registration tiles.
+- `/vep-fragment/<event-slug>-agenda` — the tabbed agenda (per event, since sessions differ).
+- `/vep-fragment/header` — the VEP site header. Loaded automatically on every `/vep` page.
+- `/vep-fragment/footer` — the VEP site footer (dark theme). Loaded automatically on every `/vep` page.
 
 When you find copy that will be identical across events (a standard disclaimer, a recurring
 sponsor set), add it as a fragment here and reference it from the template.
+
+## Header & footer
+
+Every `/vep` page automatically uses the VEP header and footer from `/vep-fragment/header`
+and `/vep-fragment/footer` — no per-page authoring needed. These are VEP's **own copies** of
+the site chrome, so the team can edit them (nav links, contact info, footer columns) without
+affecting other parts of the site. Editing either fragment updates all VEP event pages at once.
 
 ## Building blocks used (for reference)
 
