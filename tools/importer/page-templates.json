@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "connect-event",
+      "urls": [
+        "https://events.sap.com/us-2026-sap-connect-days-data-it-houston/en_us/home.html"
+      ],
+      "representativeUrl": "https://events.sap.com/us-2026-sap-connect-days-data-it-houston/en_us/home.html",
+      "description": "SAP Connect event-detail page: hero, intro, tabbed agenda, registration tiles, tiered sponsor logos. Uses the connect (dark) page template.",
+      "urlPattern": "/us-2026-sap-connect-days-data-it-houston/en_us/*",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            ".container.cmp-container--topLarge"
+          ]
+        },
+        {
+          "name": "columns",
+          "instances": [
+            ".container.cmp-container--topSmall.cmp-container--bottomSmall.aem-GridColumn--default--6",
+            ".container.cmp-container--topSmall.cmp-container--bottomSmall.aem-GridColumn--default--5",
+            ".container.responsivegrid.aem-GridColumn.aem-GridColumn--default--4:not(.cmp-container--rounded)"
+          ]
+        },
+        {
+          "name": "advanced-tabs",
+          "instances": [
+            ".tabs.panelcontainer"
+          ]
+        },
+        {
+          "name": "card",
+          "instances": [
+            ".container.cmp-container--rounded.aem-GridColumn--default--4"
+          ]
+        },
+        {
+          "name": "section-intro",
+          "instances": [
+            "#container-b148bfe79e"
+          ],
+          "section": "light"
+        },
+        {
+          "name": "section-agenda",
+          "instances": [
+            "#container-4a42ff25b9"
+          ],
+          "section": "light"
+        },
+        {
+          "name": "section-registration",
+          "instances": [
+            "#registration"
+          ],
+          "section": "light"
+        },
+        {
+          "name": "section-partners",
+          "instances": [
+            "#container-31b98399a7"
+          ],
+          "section": "light"
+        }
+      ],
+      "sections": [
+        {
+          "id": "hero",
+          "name": "Hero",
+          "selector": ".container.cmp-container--topLarge",
+          "style": null,
+          "blocks": [
+            "hero"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "intro",
+          "name": "Intro",
+          "selector": "#container-b148bfe79e",
+          "style": "light",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            "#title-b9d20c1123"
+          ]
+        },
+        {
+          "id": "agenda",
+          "name": "Agenda",
+          "selector": "#container-4a42ff25b9",
+          "style": "light",
+          "blocks": [
+            "advanced-tabs"
+          ],
+          "defaultContent": [
+            "#title-8db653ce1b"
+          ]
+        },
+        {
+          "id": "registration",
+          "name": "Registration",
+          "selector": "#registration",
+          "style": "light",
+          "blocks": [
+            "card"
+          ],
+          "defaultContent": [
+            "#title-1df3e4ff48",
+            "#text-0c7e0369e2"
+          ]
+        },
+        {
+          "id": "partners",
+          "name": "Partners",
+          "selector": "#container-31b98399a7",
+          "style": "light",
+          "blocks": [
+            "columns"
+          ],
+          "defaultContent": [
+            "#title-d9f941368b",
+            "#title-673a2d8f88",
+            "#title-a3ecb259f6"
+          ]
+        }
+      ]
+    }
+  ]
+}

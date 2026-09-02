@@ -23,6 +23,7 @@ const locales = {
 
 const linkBlocks = [
   { fragment: '/fragments/' },
+  { fragment: '/vep-fragment/' },
   { schedule: '/schedules/' },
   // Only auto-embed genuine video URLs. Channel/social links such as
   // youtube.com/@SAP (used in the footer) must stay plain links, not players.
