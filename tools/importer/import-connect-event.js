@@ -98,7 +98,19 @@ const PAGE_TEMPLATE = {
     { id: 'hero', name: 'Hero', selector: '.container.cmp-container--topLarge', style: null, blocks: ['hero'], defaultContent: [] },
     { id: 'intro', name: 'Intro', selector: '#container-b148bfe79e', style: 'light', blocks: ['columns'], defaultContent: ['#title-b9d20c1123'] },
     { id: 'agenda', name: 'Agenda', selector: '#container-4a42ff25b9', style: 'light', blocks: ['advanced-tabs'], defaultContent: ['#title-8db653ce1b'] },
-    { id: 'registration', name: 'Registration', selector: '#registration', style: 'light', blocks: ['card'], defaultContent: ['#title-1df3e4ff48', '#text-0c7e0369e2'] },
+    {
+      id: 'registration',
+      name: 'Registration',
+      selector: '#registration',
+      style: 'light',
+      // Two day tiles side by side + centered heading — matches the repo's
+      // connect pages (grid:2, center, container). Without grid the cards stack.
+      meta: {
+        style: 'light, center, container', grid: '2', gap: 'l', spacing: 'xxl',
+      },
+      blocks: ['card'],
+      defaultContent: ['#title-1df3e4ff48', '#text-0c7e0369e2'],
+    },
     { id: 'partners', name: 'Partners', selector: '#container-31b98399a7', style: 'light', blocks: ['columns'], defaultContent: ['#title-d9f941368b', '#title-673a2d8f88', '#title-a3ecb259f6'] },
   ],
 };

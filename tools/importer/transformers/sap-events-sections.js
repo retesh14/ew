@@ -53,9 +53,15 @@ export default function transform(hookName, element, payload) {
       const anchor = marker || element.querySelector(section.selector);
       if (!anchor) continue; // neither survived — selector didn't match post-parse; skip, never guess
 
+      // Richer section metadata when the template provides it (grid, gap,
+      // container, spacing) — e.g. the registration day tiles need grid:2 so
+      // the two cards sit side by side, matching the repo's connect pages.
+      const cells = section.meta
+        ? { ...section.meta, style: section.meta.style || section.style }
+        : { style: section.style };
       const metadataBlock = WebImporter.Blocks.createBlock(document, {
         name: 'Section Metadata',
-        cells: { style: section.style },
+        cells,
       });
       anchor.after(metadataBlock);
 
