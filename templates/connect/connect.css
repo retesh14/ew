@@ -1,26 +1,103 @@
+/* SAP "72" brand font — self-hosted (from @sap-theming, OFL/Apache-licensed).
+   Loaded only via this template's CSS, so it stays off the global critical path. */
+@font-face {
+  font-family: "72";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/styles/fonts/72-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "72";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/styles/fonts/72-semibold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "72";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/styles/fonts/72-bold.woff2") format("woff2");
+}
+
 /*
  * connect template — dark/black event page (SAP Connect style).
  * Sets the whole page to the dark color scheme so sections default to
  * black background + light text. Individual sections can still override
  * via section-metadata Background (e.g. a lighter tinted section).
+ *
+ * Design tokens below are scoped to this template only (body.connect-template)
+ * so the SAP event look never leaks into other pages (support, partner, etc.).
+ * Matched from the source: events.sap.com Connect Day page.
+ *   - Font: SAP brand font "72 Brand Variable" is proprietary and not on any
+ *     public CDN, so we use SAP's own fallback chain (Arial/Helvetica) with the
+ *     source's weights + sizes, which is what drives the visual feel.
+ *   - Headings: h1 44px / h2 40px, weight 500, line-height ~1.5.
+ *   - Accent (buttons/links): SAP blue #0057d2.
  */
 
 body.connect-template {
   color-scheme: dark;
-  background-color: #0b0f14; /* near-black, softer than pure #000 for text contrast */
-  --color-background: #0b0f14;
+  background-color: #000; /* source event sections are true black */
+
+  --color-background: #000;
   --color-text: var(--color-light);
+
+  /* SAP "72" brand font (self-hosted), SAP's own Arial/Helvetica fallback chain */
+  --font-family: "72", arial, helvetica, sans-serif;
+
+  /* SAP accent blue (Register CTA + links) */
+  --color-sap-blue: #0057d2;
+  --color-link: #4db1ff; /* lighter blue for legibility on black */
+
+  /* Heading scale matched to source (desktop) */
+  --heading-font-size-xxl: 44px;  /* h1 */
+  --heading-font-size-xl: 40px;   /* h2 */
+  --heading-font-size-l: 28px;    /* h3 section subheads */
+  --heading-font-size-m: 22px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
 }
 
-/* Default text/heading color across the dark page */
+/* Body + heading font family across the template (source uses one family) */
+body.connect-template,
 body.connect-template main {
-  color: var(--color-light);
+  font-family: var(--font-family);
 }
 
+/* Source headings are medium weight (500) with generous line-height, light on dark */
 body.connect-template main h1,
 body.connect-template main h2,
 body.connect-template main h3,
 body.connect-template main h4 {
+  color: var(--color-light);
+  font-family: var(--font-family);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+body.connect-template main h1 { line-height: 1.5; }
+
+/* Links + primary CTA in SAP blue */
+body.connect-template main a.button {
+  background-color: var(--color-sap-blue);
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+body.connect-template main a.button:hover {
+  background-color: #0040a0;
+}
+
+/* Default text color across the dark page (heading colors set above) */
+body.connect-template main {
   color: var(--color-light);
 }
 

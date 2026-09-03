@@ -17,10 +17,12 @@ export default async function init(el) {
   const vepFooter = pagePath === '/vep' || pagePath.startsWith('/vep/');
   const path = footerMeta || (vepFooter ? '/vep-fragment/footer' : FOOTER_PATH);
 
-  // Per-section footer theme: pages under /events and /vep use the dark (black)
-  // footer to match sap.com/events; everything else (support, partner, home)
-  // keeps the default light-grey footer. Path-based so no per-page authoring.
-  if (pagePath === '/events' || pagePath.startsWith('/events/') || vepFooter) {
+  // Per-section footer theme: pages under /events use the dark (black) footer to
+  // match sap.com/events; everything else (support, partner, home) keeps the
+  // default light-grey footer. Path-based so no per-page authoring is needed.
+  // NOTE: /vep is NOT dark — the source SAP event page uses the standard light
+  // sap.com footer, so VEP keeps the default light footer.
+  if (pagePath === '/events' || pagePath.startsWith('/events/')) {
     el.classList.add('footer-events');
   }
 
