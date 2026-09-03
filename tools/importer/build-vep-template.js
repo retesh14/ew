@@ -53,9 +53,9 @@ fs.writeFileSync(path.join(ROOT, 'vep-fragment', 'registration-note.plain.html')
 // (brand section) and a "Register now" primary CTA (actions section), with
 // empty nav sections in between. Bold link → primary button per the repo's
 // markdown-emphasis button convention.
-const headerFragment = `<div><p><a href="https://www.sap.com/index.html">SAP</a></p></div>
-<div></div>
-<div></div>
+// Three sections only — the header block maps them to brand / nav / actions.
+// Extra empty sections would push the CTA out of the actions slot.
+const headerFragment = `<div><p><a href="https://www.sap.com/index.html"><img src="/vep-media/sap-logo.svg" alt="SAP"></a></p></div>
 <div></div>
 <div>
   <p><a href="/vep/[event-slug]/registration"><strong>Register now</strong></a></p>

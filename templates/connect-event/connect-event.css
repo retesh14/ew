@@ -119,10 +119,31 @@ body.connect-event-template main a.button:hover {
  * doesn't reach it; style the header's Register CTA to SAP blue here.
  * ------------------------------------------------------------------ */
 
+/* Lay the header out as a simple two-item bar (logo left, CTA right),
+   overriding the shared block's 3-column brand/nav/actions grid. This is
+   deterministic no matter how many authored sections survive decoration
+   (an empty nav section gets dropped, which would otherwise misplace the CTA). */
+body.connect-event-template header .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-l);
+}
+
+body.connect-event-template header .header-content > .section {
+  margin: 0;
+}
+
+/* The last surviving section (holds the Register CTA) sits hard right. */
+body.connect-event-template header .header-content > .section:last-child {
+  margin-left: auto;
+}
+
 /* SAP logo: the source uses the full 2-color SAP logo (~2:1). Let it size by
    width so the aspect ratio is preserved (the shared header caps images at
    --logo-height:40px, which squashes a wide logo). */
-body.connect-event-template header .brand-section .default-content a img {
+body.connect-event-template header .brand-section .default-content a img,
+body.connect-event-template header .default-content a img {
   width: auto;
   height: 34px;
 }
