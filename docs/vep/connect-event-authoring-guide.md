@@ -86,3 +86,18 @@ affecting other parts of the site. Editing either fragment updates all VEP event
 | Partners | `columns (sponsors-logos)` | One logo row per tier |
 
 These blocks already exist in the project — no development is needed to author a new event.
+
+## Design system (connect template)
+
+The SAP event look is applied by the **`connect` page template** (`Template: connect` in page
+metadata) and is scoped entirely to `body.connect-template`, so it never affects other pages.
+It provides:
+
+- **Font:** SAP's **"72"** brand font, self-hosted at `styles/fonts/72-{regular,semibold,bold}.woff2`
+  (from `@sap-theming`, open-licensed), with an Arial/Helvetica fallback. `@font-face` lives in
+  `templates/connect/connect.css` so it stays off the global critical path.
+- **Type scale:** h1 44px, h2 40px, weight 500 — matched to the source.
+- **Colors:** true-black sections, white text, SAP blue (`#0057d2`) primary CTA.
+- **Footer:** the standard **light** sap.com footer (the source event page is not a dark footer).
+
+All of this comes for free with `Template: connect` — authors don't set fonts or colors per event.
