@@ -49,21 +49,36 @@ fs.mkdirSync(path.join(ROOT, 'vep-fragment'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'vep-templates', 'connect-event.plain.html'), template + '\n');
 fs.writeFileSync(path.join(ROOT, 'vep-fragment', 'registration-note.plain.html'), fragment + '\n');
 
-// VEP chrome — copy the repo's current nav fragments into vep-fragment so the
-// team owns an editable copy. Only (re)write if the source exists and the vep
-// copy is absent, so later manual customization is never clobbered.
+// VEP header — minimal event chrome matching the source: just the SAP logo
+// (brand section) and a "Register now" primary CTA (actions section), with
+// empty nav sections in between. Bold link → primary button per the repo's
+// markdown-emphasis button convention.
+const headerFragment = `<div><p><a href="https://www.sap.com/index.html">SAP</a></p></div>
+<div></div>
+<div></div>
+<div></div>
+<div>
+  <p><a href="/vep/[event-slug]/registration"><strong>Register now</strong></a></p>
+</div>`;
+
+// VEP footer — the source event page uses the standard sap.com footer, so copy
+// the repo's nav footer as the editable VEP starting point.
 const chrome = [
-  { src: 'fragments/nav/header.plain.html', dst: 'vep-fragment/header.plain.html' },
+  { content: headerFragment, dst: 'vep-fragment/header.plain.html' },
   { src: 'fragments/nav/footer.plain.html', dst: 'vep-fragment/footer.plain.html' },
 ];
-for (const { src, dst } of chrome) {
-  const srcPath = path.join(ROOT, src);
+for (const { src, content, dst } of chrome) {
   const dstPath = path.join(ROOT, dst);
-  if (fs.existsSync(srcPath) && !fs.existsSync(dstPath)) {
-    fs.copyFileSync(srcPath, dstPath);
-    console.log(`✅ Wrote content/${dst} (copied from ${src})`);
-  } else if (fs.existsSync(dstPath)) {
+  if (fs.existsSync(dstPath)) {
     console.log(`↷ content/${dst} exists — left as-is (customizable)`);
+    continue;
+  }
+  if (content) {
+    fs.writeFileSync(dstPath, content + '\n');
+    console.log(`✅ Wrote content/${dst} (minimal event header)`);
+  } else if (src && fs.existsSync(path.join(ROOT, src))) {
+    fs.copyFileSync(path.join(ROOT, src), dstPath);
+    console.log(`✅ Wrote content/${dst} (copied from ${src})`);
   }
 }
 

@@ -114,6 +114,26 @@ body.connect-event-template main a.button:hover {
 }
 
 /* ------------------------------------------------------------------ *
+ * Header — minimal event chrome (SAP logo + Register now), light bar.
+ * The header renders outside <main>, so the main-scoped button rule above
+ * doesn't reach it; style the header's Register CTA to SAP blue here.
+ * ------------------------------------------------------------------ */
+body.connect-event-template header .btn,
+body.connect-event-template header a.button {
+  background-color: var(--color-sap-blue);
+  color: #fff;
+  border-radius: 999px; /* source uses a pill-shaped Register button */
+  padding: 8px 24px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+body.connect-event-template header .btn:hover,
+body.connect-event-template header a.button:hover {
+  background-color: #0040a0;
+}
+
+/* ------------------------------------------------------------------ *
  * Hero `promo` — solid SAP navy banner, white text, contained graphic right.
  * Scoped so the shared blocks/hero/hero.css (used by other pages) is untouched.
  * ------------------------------------------------------------------ */
