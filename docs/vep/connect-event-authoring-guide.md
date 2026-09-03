@@ -6,8 +6,9 @@ content authors; no code changes are needed to publish a new event.
 ## What this template is
 
 A reusable event-detail page type, modelled on the SAP Connect Day pages. Every event
-built from it has the same five sections in the same order, on the dark **connect** theme.
-You only change the copy, images, dates, and sponsors — the layout and styling are fixed.
+built from it has the same five sections in the same order, on the light **connect-event**
+theme (white page, navy hero). You only change the copy, images, dates, and sponsors —
+the layout and styling are fixed.
 
 Reference example (fully filled in):
 `/vep/us-2026-sap-connect-days-data-it-houston`
@@ -60,35 +61,35 @@ the placeholders and writes the page + its per-event agenda/header fragments.
 
 ## Rules that keep the layout working
 
-- **Keep `Template: connect`** in the page metadata — remove it and the page loses the dark
-  event theme.
-- **Section styling**: each content section carries `Section Metadata → style: light`. That
-  paints a light panel on the dark page. Leave it in place.
+- **Keep `Template: connect-event`** in the page metadata — it applies the light SAP theme
+  (72 font, navy hero, agenda accordion, minimal header, light footer).
+- **Section styling**: keep each content section's `Section Metadata` as generated —
+  intro `light, container`; registration `light, center, container` + `grid: 2`; partners
+  `light, center, container`. These drive the containment, the two-up card grid, and the
+  centred tiers. Removing them reintroduces the layout bugs (clipped intro text, stacked
+  cards, left-packed logos).
 - **Hero order**: date/venue line first, then the H1 title, then the subtitle.
 - **Agenda tabs**: the number of tab labels must match the number of panel sections that
   follow, in the same order.
-- **Images** live in `/vep-media/` and are referenced as `/vep-media/<file>.png`. Don't hot-link
+- **Images** live in `/vep-media/` and are referenced as `/vep-media/<file>`. Don't hot-link
   external URLs — keep the page self-contained.
 
-## Shared fragments
+## Fragments
 
-Boilerplate that repeats across events lives in `/vep-fragment/` and is referenced by link.
-Editing the fragment updates every event that references it.
+Per-event fragments live in `/vep-fragment/` and are loaded automatically for pages under
+`/vep/<event-slug>`:
 
-- `/vep-fragment/registration-note` — the "Day 2 requires Day 1" note under the registration tiles.
-- `/vep-fragment/<event-slug>-agenda` — the tabbed agenda (per event, since sessions differ).
-- `/vep-fragment/header` — the VEP site header. Loaded automatically on every `/vep` page.
-- `/vep-fragment/footer` — the VEP site footer (dark theme). Loaded automatically on every `/vep` page.
+- `/vep-fragment/<event-slug>-agenda` — the tabbed agenda (sessions differ per event).
+- `/vep-fragment/<event-slug>-header` — the event header (SAP logo + Register CTA to that
+  event's registration page). Falls back to the shared `/vep-fragment/header` if absent.
 
-When you find copy that will be identical across events (a standard disclaimer, a recurring
-sponsor set), add it as a fragment here and reference it from the template.
+Shared chrome that's the same for every event:
 
-## Header & footer
+- `/vep-fragment/header` — default VEP header (used when an event has no `<slug>-header`).
+- `/vep-fragment/footer` — the VEP footer (the standard **light** sap.com footer).
 
-Every `/vep` page automatically uses the VEP header and footer from `/vep-fragment/header`
-and `/vep-fragment/footer` — no per-page authoring needed. These are VEP's **own copies** of
-the site chrome, so the team can edit them (nav links, contact info, footer columns) without
-affecting other parts of the site. Editing either fragment updates all VEP event pages at once.
+Editing a shared fragment updates every event that uses it; editing a per-event fragment
+affects only that event.
 
 ## Building blocks used (for reference)
 
