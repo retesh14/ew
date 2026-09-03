@@ -45,5 +45,20 @@ export default function transform(hookName, element, payload) {
       'link',
       'noscript',
     ]);
+
+    // Tracking pixels (Twitter/X, analytics, ad networks, demdex, Google ads)
+    // get scraped as trailing <img> with empty alt. They are not content and,
+    // once stretched by sponsor CSS, create a huge empty gap before the footer.
+    // Remove any img whose src points at a known tracking host or is a 1x1 gif.
+    const TRACKING = /(t\.co\/i\/adsct|analytics\.twitter\.com|\/adsct|demdex\.net|doubleclick|googleadservices|google\.com\/pagead|6sc\.co|myvisualiq|\.gif(\?|$))/i;
+    element.querySelectorAll('img').forEach((img) => {
+      const src = img.getAttribute('src') || '';
+      if (TRACKING.test(src)) img.remove();
+    });
+
+    // Clean up any now-empty paragraphs / wrappers the pixels left behind.
+    element.querySelectorAll('p').forEach((p) => {
+      if (!p.textContent.trim() && !p.querySelector('img, picture, a, svg')) p.remove();
+    });
   }
 }

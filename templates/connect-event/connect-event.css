@@ -315,13 +315,15 @@ body.connect-event-template .sponsors-logos-wrapper h3 {
    every tier reads as a distinct "heading → logos" block.
    Scoped via :has() to the partners section only (never registration). */
 body.connect-event-template main > .section:has(.sponsors-logos) .default-content h3 {
-  margin-top: var(--spacing-xxl);
-  margin-bottom: var(--spacing-s);
+  margin-top: calc(var(--spacing-xxl) * 1.75); /* ~84px — generous tier separation like source */
+  margin-bottom: var(--spacing-l);
+  font-size: 20px; /* source tier heading size */
+  font-weight: 500;
   text-align: center;
 }
 
-/* The tier heading + its logo row sit tight together (small gap), while the
-   gap BEFORE the next tier is large — creating clear visual grouping. */
+/* The tier heading + its logo row sit tight together, while the gap BEFORE
+   the next tier is large — clear visual grouping. */
 body.connect-event-template .sponsors-logos {
   margin-top: var(--spacing-xs);
 }
