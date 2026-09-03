@@ -96,8 +96,28 @@ const PAGE_TEMPLATE = {
   ],
   sections: [
     { id: 'hero', name: 'Hero', selector: '.container.cmp-container--topLarge', style: null, blocks: ['hero'], defaultContent: [] },
-    { id: 'intro', name: 'Intro', selector: '#container-b148bfe79e', style: 'light', blocks: ['columns'], defaultContent: ['#title-b9d20c1123'] },
-    { id: 'agenda', name: 'Agenda', selector: '#container-4a42ff25b9', style: 'light', blocks: ['advanced-tabs'], defaultContent: ['#title-8db653ce1b'] },
+    {
+      id: 'intro',
+      name: 'Intro',
+      selector: '#container-b148bfe79e',
+      style: 'light',
+      // Contain + gap: without `container` the columns block runs edge-to-edge
+      // (text clipped at the viewport edge). align-top keeps text/image top-aligned.
+      meta: {
+        style: 'light, container', gap: 'xl', spacing: 'xxl',
+      },
+      blocks: ['columns'],
+      defaultContent: ['#title-b9d20c1123'],
+    },
+    {
+      id: 'agenda',
+      name: 'Agenda',
+      selector: '#container-4a42ff25b9',
+      style: 'light',
+      meta: { style: 'light, container', spacing: 'xxl' },
+      blocks: ['advanced-tabs'],
+      defaultContent: ['#title-8db653ce1b'],
+    },
     {
       id: 'registration',
       name: 'Registration',
@@ -111,7 +131,18 @@ const PAGE_TEMPLATE = {
       blocks: ['card'],
       defaultContent: ['#title-1df3e4ff48', '#text-0c7e0369e2'],
     },
-    { id: 'partners', name: 'Partners', selector: '#container-31b98399a7', style: 'light', blocks: ['columns'], defaultContent: ['#title-d9f941368b', '#title-673a2d8f88', '#title-a3ecb259f6'] },
+    {
+      id: 'partners',
+      name: 'Partners',
+      selector: '#container-31b98399a7',
+      style: 'light',
+      // Centered, contained sponsor grid — matches the connect pages' sponsor row.
+      meta: {
+        style: 'light, center, container', gap: 'l', spacing: 'xxl',
+      },
+      blocks: ['columns'],
+      defaultContent: ['#title-d9f941368b', '#title-673a2d8f88', '#title-a3ecb259f6'],
+    },
   ],
 };
 
