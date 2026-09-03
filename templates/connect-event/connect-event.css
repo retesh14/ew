@@ -435,18 +435,22 @@ body.connect-event-template .agenda-item-body ul {
  * Registration form (EDS Form block) — matches the source SAP form:
  * two-column grid, large rounded boxes, and FLOATING labels (the label
  * sits inside the box at rest and floats up small on focus / when filled).
+ *
+ * The boilerplate form.css already lays the form out as a 12-column grid and
+ * defaults every .field-wrapper to `grid-column: span 12` (full width). We keep
+ * that grid and just re-span fields into two columns (span 6). Higher-specificity
+ * `main .form form` selectors are needed to beat the boilerplate defaults.
  * ------------------------------------------------------------------ */
 body.connect-event-template .form form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-l) var(--spacing-l);
   max-width: 1000px;
+  gap: var(--spacing-l) var(--spacing-l);
 }
 
-/* Each field is a positioned grid cell so its label can float inside it. */
-body.connect-event-template .form .field-wrapper {
+/* Default: fields sit two-up (half the 12-col grid). */
+body.connect-event-template main .form form .field-wrapper {
   position: relative;
   margin: 0;
+  grid-column: span 6;
 }
 
 /* The control: large rounded box, roomy top padding so the resting label
@@ -500,14 +504,15 @@ body.connect-event-template .form .field-wrapper:has(select:valid) > label {
   color: var(--color-sap-blue);
 }
 
-/* Full-width fields span both columns. */
-body.connect-event-template .form .field-jobtitle,
-body.connect-event-template .form .field-dietrestrictions,
-body.connect-event-template .form .checkbox-wrapper,
-body.connect-event-template .form .field-consentnote,
-body.connect-event-template .form .plain-text-wrapper,
-body.connect-event-template .form .form-submit-wrapper {
-  grid-column: 1 / -1;
+/* Full-width fields span all 12 columns (job title, dietary note, the three
+   consent checkboxes, plain-text consent line, submit). */
+body.connect-event-template main .form form .field-jobtitle,
+body.connect-event-template main .form form .field-dietrestrictions,
+body.connect-event-template main .form form .checkbox-wrapper,
+body.connect-event-template main .form form .field-consentnote,
+body.connect-event-template main .form form .plain-text-wrapper,
+body.connect-event-template main .form form .form-submit-wrapper {
+  grid-column: span 12;
 }
 
 /* Consent checkboxes: label beside the box (not floating), normal wrap. */
@@ -554,6 +559,12 @@ body.connect-event-template .form fieldset[name="PhoneGroup"] > legend {
   background: #fff;
   font-size: 12px;
   color: var(--color-sap-blue);
+}
+
+/* Inner phone field-wrappers lay out in the fieldset's own 2-col grid, not the
+   form's 12-col grid — reset the inherited span so code + number stay inline. */
+body.connect-event-template main .form form fieldset[name="PhoneGroup"] .field-wrapper {
+  grid-column: auto;
 }
 
 /* Inputs inside the phone group are borderless (the fieldset is the box). */
