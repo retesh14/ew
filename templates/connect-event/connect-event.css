@@ -289,17 +289,28 @@ body.connect-event-template .sponsors-logos .row {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-l) var(--spacing-xxl); /* row gap / column gap */
+
+  /* Cap the row width and centre it so wrapped rows stay visually centred
+     within the section instead of stretching edge-to-edge. */
+  max-width: 1000px;
+  margin-inline: auto;
 }
 
 body.connect-event-template .sponsors-logos .col {
-  flex: 0 1 auto;
+  flex: 0 0 auto;
+
+  /* Give each logo a consistent cell so a wrapped row aligns tidily. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
 }
 
 body.connect-event-template .sponsors-logos .col img {
   width: auto;
-  height: 64px;
-  max-width: 180px;
+  height: 56px;
+  max-width: 190px;
   object-fit: contain; /* preserve each logo's aspect ratio */
 }
 
