@@ -25,17 +25,22 @@ const ROOT = path.resolve(__dirname, '../../content');
 // ---------------------------------------------------------------------------
 // 1. Blank connect-event template
 // ---------------------------------------------------------------------------
-// Authored by hand-shaped block tables (mirrors the imported page's structure
-// exactly) with placeholders. Section metadata (style: light) and Template:
-// connect are preserved so the dark theme + light panels render immediately.
-const PLACEHOLDER_IMG = '/vep-media/PLACEHOLDER-hero.png';
-
+// Hand-shaped block tables mirroring the finished Houston event, with real copy
+// swapped for [PLACEHOLDER] prompts. IMPORTANT: this template carries the SAME
+// section-metadata as the live event page, so a page rolled out from it renders
+// correctly on day one — no re-discovering the layout fixes:
+//   - intro:        style "light, container" + gap/spacing (else text clips edge)
+//   - registration: style "light, center, container" + grid 2 (else cards stack)
+//   - partners:     style "light, center, container" + gap/spacing (centred tiers)
+//   - Template: connect-event  → the light SAP theme, 72 font, navy hero, etc.
+// Agenda is a per-event fragment (sessions differ); header/footer come from
+// vep-fragment via the connect-event template's path-based chrome.
 const template = `<div><div class="hero promo"><div><div><picture><img src="/vep-media/PLACEHOLDER-hero.png" alt="[Hero image alt]"></picture></div></div><div><div><p>[Month D–D, YYYY | Venue, Street, City, ST]</p><h1>[Event title]</h1><p>[One-line event subtitle / theme]</p></div></div></div></div>
-<div><div class="section-metadata"><div><div>style</div><div>light</div></div></div><h2>[Intro heading — what the event is about]</h2><div class="columns"><div><div><p>[Intro paragraph. Describe who should attend and what they will get.]</p><p>This program will include:</p><ul><li>[Program highlight 1]</li><li>[Program highlight 2]</li><li>[Program highlight 3]</li></ul><p>[Closing call-to-action sentence.]</p></div><div><picture><img src="/vep-media/PLACEHOLDER-intro.png" alt="[Intro image alt]"></picture></div></div></div></div>
+<div><div class="section-metadata"><div><div>style</div><div>light, container</div></div><div><div>gap</div><div>xl</div></div><div><div>spacing</div><div>xxl</div></div></div><h2>[Intro heading — what the event is about]</h2><div class="columns"><div><div><p>[Intro paragraph. Describe who should attend and what they will get.]</p><p>This program will include:</p><ul><li>[Program highlight 1]</li><li>[Program highlight 2]</li><li>[Program highlight 3]</li></ul><p>[Closing call-to-action sentence.]</p></div><div><picture><img src="/vep-media/PLACEHOLDER-intro.png" alt="[Intro image alt]"></picture></div></div></div></div>
 <div><p><a href="/vep-fragment/[event-slug]-agenda">/vep-fragment/[event-slug]-agenda</a></p></div>
-<div><div class="section-metadata"><div><div>style</div><div>light</div></div></div><h2>Registration</h2><div class="card"><div><div><p><picture><img src="/vep-media/PLACEHOLDER-calendar.png" alt="Calendar"></picture></p><h3>Day 1</h3><p>[Weekday, Month D, YYYY]</p><p><a href="/vep/[event-slug]/registration">Register now</a></p></div></div></div><div class="card"><div><div><p><picture><img src="/vep-media/PLACEHOLDER-calendar.png" alt="Calendar"></picture></p><h3>Day 2</h3><p>[Weekday, Month D, YYYY]</p></div></div></div></div>
+<div><div class="section-metadata"><div><div>style</div><div>light, center, container</div></div><div><div>grid</div><div>2</div></div><div><div>gap</div><div>l</div></div><div><div>spacing</div><div>xxl</div></div></div><h2>Registration</h2><div class="card"><div><div><p><picture><img src="/vep-media/PLACEHOLDER-calendar.png" alt="Calendar"></picture></p><h3>Day 1</h3><p>[Weekday, Month D, YYYY]</p><p><a href="[registration-url]">Register now</a></p></div></div></div><div class="card"><div><div><p><picture><img src="/vep-media/PLACEHOLDER-calendar.png" alt="Calendar"></picture></p><h3>Day 2</h3><p>[Weekday, Month D, YYYY]</p></div></div></div></div>
 <div><div class="fragment"><div><div><p><a href="/vep-fragment/registration-note">/vep-fragment/registration-note</a></p></div></div></div></div>
-<div><div class="section-metadata"><div><div>style</div><div>light</div></div></div><h2>In partnership with:</h2><h3>Platinum</h3><div class="columns sponsors-logos"><div><div><picture><img src="/vep-media/PLACEHOLDER-sponsor.png" alt="[Sponsor]"></picture></div></div></div><h3>Gold</h3><div class="columns sponsors-logos"><div><div><picture><img src="/vep-media/PLACEHOLDER-sponsor.png" alt="[Sponsor]"></picture></div></div></div><h3>Silver</h3><div class="columns sponsors-logos"><div><div><picture><img src="/vep-media/PLACEHOLDER-sponsor.png" alt="[Sponsor]"></picture></div></div></div></div>
+<div><div class="section-metadata"><div><div>style</div><div>light, center, container</div></div><div><div>gap</div><div>l</div></div><div><div>spacing</div><div>xxl</div></div></div><h2>In partnership with:</h2><h3>Platinum</h3><div class="columns sponsors-logos"><div><div><picture><img src="/vep-media/PLACEHOLDER-sponsor.png" alt="[Sponsor]"></picture></div></div></div><h3>Gold</h3><div class="columns sponsors-logos"><div><div><picture><img src="/vep-media/PLACEHOLDER-sponsor.png" alt="[Sponsor]"></picture></div></div></div><h3>Silver</h3><div class="columns sponsors-logos"><div><div><picture><img src="/vep-media/PLACEHOLDER-sponsor.png" alt="[Sponsor]"></picture></div></div></div></div>
 <div><div class="metadata"><div><div>Title</div><div>[Event title]</div></div><div><div>Description</div><div>[SEO description — event, date, city.]</div></div><div><div>Template</div><div>connect-event</div></div></div></div>`;
 
 // ---------------------------------------------------------------------------
