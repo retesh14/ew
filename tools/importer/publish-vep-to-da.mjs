@@ -26,18 +26,25 @@ function absolutizeMedia(html) {
   return html.replace(/(src|srcset)="\/vep-media\//g, `$1="${ORIGIN}/vep-media/`);
 }
 
-// Auto-discover every VEP document across the three content folders, so newly
-// rolled-out events (and their agenda fragments) publish without editing a list.
-const pages = ['vep', 'vep-templates', 'vep-fragment'].flatMap((dir) => {
+// Recursively collect files under the VEP content folders (events can live in
+// subfolders, e.g. vep/<event>/registration.plain.html + registration-form.json).
+function walk(dir) {
   const abs = path.join(ROOT, dir);
   if (!fs.existsSync(abs)) return [];
-  return fs.readdirSync(abs)
-    .filter((f) => f.endsWith('.plain.html'))
-    .map((f) => ({
-      file: `${dir}/${f}`,
-      daPath: `${dir}/${f.replace(/\.plain\.html$/, '')}`,
-    }));
-});
+  return fs.readdirSync(abs, { withFileTypes: true }).flatMap((ent) => {
+    const rel = `${dir}/${ent.name}`;
+    return ent.isDirectory() ? walk(rel) : [rel];
+  });
+}
+const allFiles = ['vep', 'vep-templates', 'vep-fragment'].flatMap(walk);
+
+// Auto-discover every VEP page (.plain.html), including event subfolders.
+const pages = allFiles
+  .filter((f) => f.endsWith('.plain.html'))
+  .map((f) => ({ file: f, daPath: f.replace(/\.plain\.html$/, '') }));
+
+// Form-definition JSON files are uploaded as-is (the Form block fetches them).
+const jsonDocs = allFiles.filter((f) => f.endsWith('.json'));
 
 function wrapDoc(inner) {
   return `<body>\n  <header></header>\n  <main>${inner}</main>\n  <footer></footer>\n</body>\n`;
@@ -65,6 +72,13 @@ for (const p of pages) {
   const inner = absolutizeMedia(fs.readFileSync(path.join(ROOT, p.file), 'utf8').trim());
   const r = await postHtml(p.daPath, wrapDoc(inner));
   results.push([`page ${p.daPath}`, r.status, r.ok ? 'OK' : r.text.slice(0, 200)]);
+}
+
+// Form-definition JSON files — posted verbatim at their content path.
+for (const f of jsonDocs) {
+  const buf = fs.readFileSync(path.join(ROOT, f));
+  const r = await postImage(f, buf, 'application/json');
+  results.push([`json ${f}`, r.status, r.ok ? 'OK' : r.text.slice(0, 200)]);
 }
 
 const CONTENT_TYPES = {
