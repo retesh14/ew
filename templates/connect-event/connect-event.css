@@ -314,13 +314,10 @@ body.connect-event-template .sponsors-logos-wrapper h3 {
    breathing room and each following tier heading clear top separation, so
    every tier reads as a distinct "heading → logos" block.
    Scoped via :has() to the partners section only (never registration). */
-body.connect-event-template main > .section:has(.sponsors-logos) .default-content-wrapper h3 {
+body.connect-event-template main > .section:has(.sponsors-logos) .default-content h3 {
   margin-top: var(--spacing-xxl);
-  text-align: center;
-}
-
-body.connect-event-template main > .section:has(.sponsors-logos) .block-content:has(.sponsors-logos) {
   margin-bottom: var(--spacing-s);
+  text-align: center;
 }
 
 /* The tier heading + its logo row sit tight together (small gap), while the
