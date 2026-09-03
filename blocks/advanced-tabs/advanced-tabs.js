@@ -83,11 +83,16 @@ function decorateAgendaAccordion(panel) {
     const item = document.createElement('div');
     item.className = 'agenda-item';
 
-    // Collect body nodes: siblings after the h3 until the next h3.
+    // Collect body nodes: siblings after the h3 until the next boundary — the
+    // next h3, or a day-divider label (a <p> whose only content is <strong>,
+    // e.g. "Day 2 Agenda"), which must stay outside any accordion row.
+    const isBoundary = (n) => n.tagName === 'H3'
+      || (n.tagName === 'P' && n.querySelector(':scope > strong')
+          && n.textContent.trim() === n.querySelector(':scope > strong').textContent.trim());
     const body = document.createElement('div');
     body.className = 'agenda-item-body';
     let sib = h.nextElementSibling;
-    while (sib && sib.tagName !== 'H3') {
+    while (sib && !isBoundary(sib)) {
       const next = sib.nextElementSibling;
       body.append(sib);
       sib = next;
