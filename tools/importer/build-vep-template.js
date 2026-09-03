@@ -58,7 +58,7 @@ fs.writeFileSync(path.join(ROOT, 'vep-fragment', 'registration-note.plain.html')
 const headerFragment = `<div><p><a href="https://www.sap.com/index.html"><img src="/vep-media/sap-logo.svg" alt="SAP"></a></p></div>
 <div></div>
 <div>
-  <p><a href="/vep/[event-slug]/registration"><strong>Register now</strong></a></p>
+  <p><a href="[registration-url]"><strong>Register now</strong></a></p>
 </div>`;
 
 // VEP footer — the source event page uses the standard sap.com footer, so copy
