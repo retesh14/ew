@@ -66,6 +66,14 @@ function rewriteMediaToVepMedia(main) {
   });
 }
 
+// Repoint the event's "Register now" links from SAP's hosted registration page
+// to our own authorable registration form under /vep/<event-slug>/registration.
+function rewriteRegistrationLinks(main) {
+  main.querySelectorAll('a[href*="/registration.html"]').forEach((a) => {
+    a.setAttribute('href', '/vep/us-2026-sap-connect-days-data-it-houston/registration');
+  });
+}
+
 // PARSER REGISTRY
 const parsers = {
   'advanced-tabs': advancedTabsParser,
@@ -229,6 +237,7 @@ export default {
 
     // Point event imagery at the local /vep-media/ folder (self-contained page).
     rewriteMediaToVepMedia(main);
+    rewriteRegistrationLinks(main);
 
     // Apply the VEP event page theme by adding a "Template: connect-event" row
     // to the Metadata block createMetadata appended (last table in main). The

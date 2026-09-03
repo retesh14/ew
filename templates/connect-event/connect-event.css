@@ -430,3 +430,62 @@ body.connect-event-template .agenda-item.is-open > .agenda-item-body {
 body.connect-event-template .agenda-item-body ul {
   margin: 0;
 }
+
+/* ------------------------------------------------------------------ *
+ * Registration form (EDS Form block) — two-column layout to match the
+ * source SAP registration form. Fields pair side by side; long fields
+ * (job title, dietary note, consent checkboxes, submit) span full width.
+ * ------------------------------------------------------------------ */
+body.connect-event-template .form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-m) var(--spacing-l);
+  max-width: 900px;
+}
+
+/* Each field is a grid cell; labels sit above inputs (source look) */
+body.connect-event-template .form .field-wrapper {
+  margin: 0;
+}
+
+/* Inputs / selects fill their cell */
+body.connect-event-template .form input,
+body.connect-event-template .form select,
+body.connect-event-template .form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Full-width fields: job title, dietary note, all consent checkboxes,
+   the plain-text consent line, and the submit button span both columns. */
+body.connect-event-template .form .field-jobtitle,
+body.connect-event-template .form .field-dietrestrictions,
+body.connect-event-template .form .checkbox-wrapper,
+body.connect-event-template .form .field-consentnote,
+body.connect-event-template .form .plain-text-wrapper,
+body.connect-event-template .form .form-submit-wrapper,
+body.connect-event-template .form button[type="submit"] {
+  grid-column: 1 / -1;
+}
+
+/* Phone group: country-code select + number inline within one cell */
+body.connect-event-template .form fieldset[name="PhoneGroup"] {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(110px, auto) 1fr;
+  gap: var(--spacing-s);
+  align-items: end;
+}
+
+body.connect-event-template .form fieldset[name="PhoneGroup"] > legend {
+  grid-column: 1 / -1;
+}
+
+/* Single-column on narrow screens */
+@media (width < 700px) {
+  body.connect-event-template .form form {
+    grid-template-columns: 1fr;
+  }
+}

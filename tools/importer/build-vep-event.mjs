@@ -23,7 +23,7 @@ const event = {
   title: 'SAP Connect Day for AI & Data Leaders',
   subtitle: 'From vision to reality with the SAP Business AI Platform',
   dateVenue: 'October 14–15, 2026 | Marriott Marquis Chicago, 2121 S Prairie Ave, Chicago, IL',
-  registrationUrl: 'https://events.sap.com/us-2026-sap-connect-days-data-it-chicago/en_us/registration.html',
+  registrationUrl: '/vep/us-2026-sap-connect-days-data-it-chicago/registration',
   day1: 'Wednesday, October 14, 2026',
   day2: 'Thursday, October 15, 2026',
   intro: {
