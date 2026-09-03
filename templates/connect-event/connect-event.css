@@ -432,55 +432,162 @@ body.connect-event-template .agenda-item-body ul {
 }
 
 /* ------------------------------------------------------------------ *
- * Registration form (EDS Form block) — two-column layout to match the
- * source SAP registration form. Fields pair side by side; long fields
- * (job title, dietary note, consent checkboxes, submit) span full width.
+ * Registration form (EDS Form block) — matches the source SAP form:
+ * two-column grid, large rounded boxes, and FLOATING labels (the label
+ * sits inside the box at rest and floats up small on focus / when filled).
  * ------------------------------------------------------------------ */
 body.connect-event-template .form form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-m) var(--spacing-l);
-  max-width: 900px;
+  gap: var(--spacing-l) var(--spacing-l);
+  max-width: 1000px;
 }
 
-/* Each field is a grid cell; labels sit above inputs (source look) */
+/* Each field is a positioned grid cell so its label can float inside it. */
 body.connect-event-template .form .field-wrapper {
+  position: relative;
   margin: 0;
 }
 
-/* Inputs / selects fill their cell */
-body.connect-event-template .form input,
+/* The control: large rounded box, roomy top padding so the resting label
+   has space to sit inside it. */
+body.connect-event-template .form input:not([type="checkbox"]),
 body.connect-event-template .form select,
 body.connect-event-template .form textarea {
   width: 100%;
   box-sizing: border-box;
+  height: 64px;
+  padding: 22px 16px 6px;
+  border: 1px solid #7a8a99;
+  border-radius: 8px;
+  background: #fff;
+  font-family: var(--font-family);
+  font-size: 17px;
+  color: var(--color-text);
 }
 
-/* Full-width fields: job title, dietary note, all consent checkboxes,
-   the plain-text consent line, and the submit button span both columns. */
+body.connect-event-template .form input:focus,
+body.connect-event-template .form select:focus,
+body.connect-event-template .form textarea:focus {
+  outline: none;
+  border-color: var(--color-sap-blue);
+  box-shadow: 0 0 0 1px var(--color-sap-blue);
+}
+
+/* Floating label — resting position: inside the box, mid-height. */
+body.connect-event-template .form .field-wrapper > label {
+  position: absolute;
+  left: 16px;
+  top: 20px;
+  margin: 0;
+  padding: 0 4px;
+  color: #5a6b7b;
+  font-size: 17px;
+  font-weight: 400;
+  pointer-events: none;
+  transition: all 0.15s ease;
+  background: #fff;
+}
+
+/* Floated position: small, at the top border, when focused or filled.
+   Text/email/tel use :placeholder-shown (fields carry a space placeholder);
+   selects float whenever focused or a non-empty option is chosen. */
+body.connect-event-template .form .field-wrapper:focus-within > label,
+body.connect-event-template .form input:not(:placeholder-shown) ~ label,
+body.connect-event-template .form .field-wrapper:has(select:valid) > label {
+  top: -9px;
+  font-size: 12px;
+  color: var(--color-sap-blue);
+}
+
+/* Full-width fields span both columns. */
 body.connect-event-template .form .field-jobtitle,
 body.connect-event-template .form .field-dietrestrictions,
 body.connect-event-template .form .checkbox-wrapper,
 body.connect-event-template .form .field-consentnote,
 body.connect-event-template .form .plain-text-wrapper,
-body.connect-event-template .form .form-submit-wrapper,
-body.connect-event-template .form button[type="submit"] {
+body.connect-event-template .form .form-submit-wrapper {
   grid-column: 1 / -1;
 }
 
-/* Phone group: country-code select + number inline within one cell */
+/* Consent checkboxes: label beside the box (not floating), normal wrap. */
+body.connect-event-template .form .checkbox-wrapper {
+  position: static;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-s);
+}
+
+body.connect-event-template .form .checkbox-wrapper > label {
+  position: static;
+  background: none;
+  pointer-events: auto;
+  font-size: var(--body-font-size-s, 14px);
+  color: var(--color-text);
+}
+
+body.connect-event-template .form input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+/* Phone group: country-code select + number inline within one cell,
+   with the "Phone" legend floating like a label. */
 body.connect-event-template .form fieldset[name="PhoneGroup"] {
-  border: none;
+  position: relative;
+  border: 1px solid #7a8a99;
+  border-radius: 8px;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: minmax(110px, auto) 1fr;
-  gap: var(--spacing-s);
-  align-items: end;
+  grid-template-columns: minmax(96px, auto) 1fr;
+  align-items: stretch;
 }
 
 body.connect-event-template .form fieldset[name="PhoneGroup"] > legend {
-  grid-column: 1 / -1;
+  position: absolute;
+  top: -9px;
+  left: 12px;
+  padding: 0 4px;
+  background: #fff;
+  font-size: 12px;
+  color: var(--color-sap-blue);
+}
+
+/* Inputs inside the phone group are borderless (the fieldset is the box). */
+body.connect-event-template .form fieldset[name="PhoneGroup"] .field-wrapper > label {
+  display: none;
+}
+
+body.connect-event-template .form fieldset[name="PhoneGroup"] select,
+body.connect-event-template .form fieldset[name="PhoneGroup"] input {
+  height: 62px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 12px 16px;
+}
+
+body.connect-event-template .form fieldset[name="PhoneGroup"] select {
+  border-right: 1px solid #d5dadd;
+}
+
+/* Submit — SAP-blue pill, left-aligned like the source. */
+body.connect-event-template .form button[type="submit"] {
+  background-color: var(--color-sap-blue);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 32px;
+  font-weight: 500;
+  cursor: pointer;
+  justify-self: start;
+}
+
+body.connect-event-template .form button[type="submit"]:hover {
+  background-color: #0040a0;
 }
 
 /* Single-column on narrow screens */
