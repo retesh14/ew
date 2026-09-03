@@ -87,17 +87,24 @@ affecting other parts of the site. Editing either fragment updates all VEP event
 
 These blocks already exist in the project — no development is needed to author a new event.
 
-## Design system (connect template)
+## Design system (connect-event template)
 
-The SAP event look is applied by the **`connect` page template** (`Template: connect` in page
-metadata) and is scoped entirely to `body.connect-template`, so it never affects other pages.
-It provides:
+The SAP event look is applied by the **`connect-event` page template**
+(`Template: connect-event` in page metadata) and is scoped entirely to
+`body.connect-event-template`, so it never affects other pages. It provides:
 
+- **Light theme:** white page, near-black text, matching the source. (A single
+  dark navy hero is the only dark region.) This is a distinct template from the
+  older dark `connect` template used by the SAP Connect Vegas page.
 - **Font:** SAP's **"72"** brand font, self-hosted at `styles/fonts/72-{regular,semibold,bold}.woff2`
   (from `@sap-theming`, open-licensed), with an Arial/Helvetica fallback. `@font-face` lives in
-  `templates/connect/connect.css` so it stays off the global critical path.
+  `templates/connect-event/connect-event.css` so it stays off the global critical path.
 - **Type scale:** h1 44px, h2 40px, weight 500 — matched to the source.
-- **Colors:** true-black sections, white text, SAP blue (`#0057d2`) primary CTA.
+- **Colors:** navy hero (`#00144a`), SAP blue (`#0057d2`) primary CTA + links.
+- **Agenda accordion:** session rows collapse/expand on click (lavender panel,
+  SAP-blue active row), matching the source. Handled by the `advanced-tabs` block
+  when the page uses the connect-event template.
 - **Footer:** the standard **light** sap.com footer (the source event page is not a dark footer).
 
-All of this comes for free with `Template: connect` — authors don't set fonts or colors per event.
+All of this comes for free with `Template: connect-event` — authors don't set fonts, colors, or
+theme per event.
