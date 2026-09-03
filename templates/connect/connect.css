@@ -146,11 +146,65 @@ body.connect-template main > .section.has-background > .section-background::afte
   );
 }
 
-/* Sponsor logos row — keep logos legible on dark (source shows them on light chips) */
+/* ------------------------------------------------------------------ *
+ * columns block — connect template only
+ * Two authored uses on this page:
+ *   1. Intro: prose + bullets (left) | decorative photo (right)
+ *   2. .sponsors-logos: tiered rows of logos on white chips
+ * All rules scoped to body.connect-template so the shared columns block
+ * (blocks/columns/columns.css) is untouched for the rest of the site.
+ * ------------------------------------------------------------------ */
+
+/* Intro two-up — mobile stacks (columns base is a single-column grid until
+   900px); desktop is an asymmetric text|image split matching the source
+   (text ~648px : image ~540px ≈ 1.2 : 1) with room to breathe between. */
+@media (width >= 900px) {
+  body.connect-template .columns:not(.sponsors-logos) .row {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--spacing-xxl); /* 48px — source gutter is generous */
+    align-items: center;
+  }
+}
+
+/* Bullet list rhythm: EDS wraps each <li>'s text in a <p>, so trim the
+   doubled block margins to a comfortable single step. */
+body.connect-template .columns:not(.sponsors-logos) li {
+  margin-block: 0.5em;
+}
+
+body.connect-template .columns:not(.sponsors-logos) li p {
+  margin-block: 0;
+}
+
+/* Sponsor logos: keep chips legible on the dark page (source uses light chips). */
 body.connect-template .sponsors-logos img {
   background: #fff;
   border-radius: 8px;
   padding: 12px 16px;
+}
+
+/* Even horizontal row per tier, centered, wrapping responsively. This
+   replaces the columns block's desktop `grid-template-columns:
+   repeat(child-count, 1fr)` (higher specificity wins in and out of the
+   media query) so a lone Platinum logo does NOT stretch full-width — each
+   chip is capped so single or many logos both sit at natural size. */
+body.connect-template .sponsors-logos .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-l);
+}
+
+body.connect-template .sponsors-logos .col {
+  flex: 0 1 auto;
+}
+
+body.connect-template .sponsors-logos .col img {
+  width: auto;
+  height: 88px;
+  max-width: 200px; /* cap so a single Platinum logo can't stretch the row */
+  object-fit: contain; /* normalise mixed logo aspect ratios, no distortion */
 }
 
 /* Section heading rhythm to echo the source's generous spacing */
@@ -158,4 +212,48 @@ body.connect-template main > .section > .default-content-wrapper > h2 {
   font-size: var(--heading-font-size-xxl, 2.5rem);
   line-height: 1.1;
   margin-bottom: 0.5em;
+}
+
+/* -----------------------------------------------------------------------------
+ * Hero `promo` variant — SAP Connect Day banner (connect template only).
+ *
+ * The shared blocks/hero/hero.css `.hero.promo` rules are used by other pages
+ * (events/finder, events, events/sapnow) on the default template, so we must
+ * NOT change them. These body.connect-template-scoped overrides restyle the
+ * banner to match the source (events.sap.com Connect Day) without leaking into
+ * those pages. Values extracted from the source computed styles:
+ *   - Banner background: solid SAP navy rgb(0, 20, 74) = #00144a (not a gradient;
+ *     the multicolour SAP graphic lives inside the right-hand PNG).
+ *   - h1: 44px, weight 500, line-height 1.5, white, left-aligned.
+ *   - Subtitle + date line: 20px, weight 400, line-height 30px, white.
+ *   - Display order: heading, subtitle, then the date/venue line last.
+ * -------------------------------------------------------------------------- */
+body.connect-template .hero.promo {
+  --min-height: 380px;
+
+  background: #00144a; /* source banner is solid navy, image supplies the colour */
+}
+
+/* Heading: source uses medium weight + generous line-height, not the shared bold */
+body.connect-template .hero.promo .hero-heading {
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Column text: put the date/venue line last (source shows it below the subtitle) */
+body.connect-template .hero.promo .fg-text {
+  display: flex;
+  flex-direction: column;
+}
+
+body.connect-template .hero.promo .fg-text .hero-detail {
+  order: 1;
+}
+
+/* Subtitle + date line share one size in the source (20px / 400 / 30px) */
+body.connect-template .hero.promo .fg-text p {
+  margin: 20px 0 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
 }
