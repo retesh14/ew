@@ -118,6 +118,16 @@ body.connect-event-template main a.button:hover {
  * The header renders outside <main>, so the main-scoped button rule above
  * doesn't reach it; style the header's Register CTA to SAP blue here.
  * ------------------------------------------------------------------ */
+
+/* SAP logo: the source uses the full 2-color SAP logo (~2:1). Let it size by
+   width so the aspect ratio is preserved (the shared header caps images at
+   --logo-height:40px, which squashes a wide logo). */
+body.connect-event-template header .brand-section .default-content a img {
+  width: auto;
+  height: 34px;
+}
+
+/* Register CTA — SAP-blue pill */
 body.connect-event-template header .btn,
 body.connect-event-template header a.button {
   background-color: var(--color-sap-blue);
@@ -187,13 +197,15 @@ body.connect-event-template .columns:not(.sponsors-logos) li p {
 }
 
 /* ------------------------------------------------------------------ *
- * Registration cards — light tiles on white, centered (source look)
+ * Registration tiles — borderless, centered, big calendar pictogram
+ * (source look). The shared card block treats the picture as a cropped
+ * cover image; these are standalone calendar graphics, so we reset that.
  * ------------------------------------------------------------------ */
 body.connect-event-template .card {
-  background-color: #fff;
-  border: 1px solid #d5dadd;
-  border-radius: 12px;
-  overflow: clip;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
   text-align: center;
 }
 
@@ -202,15 +214,49 @@ body.connect-event-template .card h3 {
   color: var(--color-text);
 }
 
-/* Calendar pictograms are small icons, not cover images — don't crop/stretch */
+body.connect-event-template .card h3 {
+  font-size: var(--heading-font-size-l);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Undo the cover-image treatment: show the calendar pictogram at natural
+   size, centered, ~150px tall like the source. */
 body.connect-event-template .card .card-picture-container {
-  padding: var(--spacing-l) var(--spacing-l) 0;
+  position: static;
+  padding: 0;
+}
+
+body.connect-event-template .card .card-picture-container picture {
+  position: static;
 }
 
 body.connect-event-template .card .card-picture-container img {
+  position: static;
   width: auto;
-  max-height: 72px;
-  margin-inline: auto;
+  height: 150px;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 0 auto var(--spacing-m);
+}
+
+/* The registration "Register now" CTA becomes a SAP-blue pill (source) */
+body.connect-event-template .card .card-cta-container a,
+body.connect-event-template #registration a.button {
+  display: inline-block;
+  background-color: var(--color-sap-blue);
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 28px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+body.connect-event-template .card .card-cta-container a::after {
+  content: none; /* drop the shared block's "›" pseudo-arrow */
+}
+
+body.connect-event-template .card .card-cta-container a:hover {
+  background-color: #0040a0;
 }
 
 /* ------------------------------------------------------------------ *

@@ -63,10 +63,15 @@ for (const p of pages) {
   results.push([`page ${p.daPath}`, r.status, r.ok ? 'OK' : r.text.slice(0, 200)]);
 }
 
+const CONTENT_TYPES = {
+  '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
+  '.svg': 'image/svg+xml', '.webp': 'image/webp', '.gif': 'image/gif',
+};
 const mediaDir = path.join(ROOT, 'vep-media');
 for (const name of fs.readdirSync(mediaDir).sort()) {
   const buf = fs.readFileSync(path.join(mediaDir, name));
-  const r = await postImage(`vep-media/${name}`, buf, 'image/png');
+  const type = CONTENT_TYPES[path.extname(name).toLowerCase()] || 'application/octet-stream';
+  const r = await postImage(`vep-media/${name}`, buf, type);
   results.push([`media ${name}`, r.status, r.ok ? 'OK' : r.text.slice(0, 200)]);
 }
 
