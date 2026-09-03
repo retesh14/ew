@@ -230,11 +230,13 @@ export default {
     // Point event imagery at the local /vep-media/ folder (self-contained page).
     rewriteMediaToVepMedia(main);
 
-    // Apply the dark event page theme by adding a "Template: connect" row to the
-    // Metadata block createMetadata appended (last table in main). The VEP
-    // header/footer fragments are selected path-based inside the header/footer
-    // blocks (see blocks/header + blocks/footer), not via metadata — this repo
-    // uses header/footer metadata as the block class name, not a fragment path.
+    // Apply the VEP event page theme by adding a "Template: connect-event" row
+    // to the Metadata block createMetadata appended (last table in main). The
+    // connect-event template is LIGHT (white page, navy hero) — matching the
+    // source — and is separate from the older dark `connect` template used by
+    // the SAP Connect Vegas page. The VEP header/footer fragments are selected
+    // path-based inside the header/footer blocks (this repo uses header/footer
+    // metadata as the block class name, not a fragment path).
     const tables = main.querySelectorAll('table');
     const metaTable = tables[tables.length - 1];
     if (metaTable) {
@@ -242,7 +244,7 @@ export default {
       const keyCell = document.createElement('td');
       keyCell.textContent = 'Template';
       const valCell = document.createElement('td');
-      valCell.textContent = 'connect';
+      valCell.textContent = 'connect-event';
       row.append(keyCell, valCell);
       metaTable.append(row);
     }

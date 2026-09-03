@@ -1,0 +1,314 @@
+/*
+ * connect-event template — SAP Connect Day event page (VEP).
+ *
+ * The source (events.sap.com Connect Day) is a LIGHT page: white background,
+ * black text, a single dark navy hero, and a light color-coded agenda accordion.
+ * This template reproduces that, scoped entirely to body.connect-event-template
+ * so it never affects other pages. (The older `connect` template is dark and is
+ * used by the SAP Connect Vegas page — kept separate on purpose.)
+ *
+ * Matched from source:
+ *   - Font: SAP "72" (self-hosted), Arial/Helvetica fallback.
+ *   - Headings: h1 44px / h2 40px, weight 500, generous line-height.
+ *   - Hero: solid SAP navy (#00144a), white text.
+ *   - Accent: SAP blue #0057d2 (Register CTA + links).
+ *   - Agenda accordion: white rows, color-coded track panels (lavender/green/grey).
+ */
+
+/* SAP "72" brand font — self-hosted (from @sap-theming, OFL/Apache-licensed).
+   Loaded only via this template's CSS, so it stays off the global critical path. */
+@font-face {
+  font-family: "72";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/styles/fonts/72-regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "72";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/styles/fonts/72-semibold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "72";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/styles/fonts/72-bold.woff2") format("woff2");
+}
+
+body.connect-event-template {
+  color-scheme: light;
+  background-color: #fff;
+
+  --color-background: #fff;
+  --color-text: #1d2d3e; /* SAP near-black text */
+
+  /* SAP "72" brand font (self-hosted), SAP's own Arial/Helvetica fallback chain */
+  --font-family: "72", arial, helvetica, sans-serif;
+
+  /* SAP accent blue (Register CTA + links) */
+  --color-sap-blue: #0057d2;
+  --color-link: #0057d2;
+
+  /* Heading scale matched to source (desktop) */
+  --heading-font-size-xxl: 44px;  /* h1 */
+  --heading-font-size-xl: 40px;   /* h2 */
+  --heading-font-size-l: 28px;    /* h3 section subheads */
+  --heading-font-size-m: 22px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
+}
+
+/* Light page: white sections, near-black text */
+body.connect-event-template,
+body.connect-event-template main {
+  background-color: #fff;
+  color: var(--color-text);
+  font-family: var(--font-family);
+}
+
+body.connect-event-template main > .section {
+  background-color: transparent;
+}
+
+/* Headings: medium weight (500), generous line-height, dark on white */
+body.connect-event-template main h1,
+body.connect-event-template main h2,
+body.connect-event-template main h3,
+body.connect-event-template main h4 {
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+body.connect-event-template main h1 { line-height: 1.5; }
+
+body.connect-event-template main > .section > .default-content-wrapper > h2 {
+  font-size: var(--heading-font-size-xxl, 2.5rem);
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+/* Links + primary CTA in SAP blue */
+body.connect-event-template main a:any-link {
+  color: var(--color-link);
+}
+
+body.connect-event-template main a.button {
+  background-color: var(--color-sap-blue);
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px 24px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+body.connect-event-template main a.button:hover {
+  background-color: #0040a0;
+}
+
+/* ------------------------------------------------------------------ *
+ * Hero `promo` — solid SAP navy banner, white text, contained graphic right.
+ * Scoped so the shared blocks/hero/hero.css (used by other pages) is untouched.
+ * ------------------------------------------------------------------ */
+body.connect-event-template .hero.promo {
+  --min-height: 420px;
+
+  background: #00144a; /* solid SAP navy — the colour graphic lives in the PNG */
+  color: #fff;
+}
+
+body.connect-event-template .hero.promo .hero-heading {
+  color: #fff;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Source hero order: date/venue → heading → subtitle */
+body.connect-event-template .hero.promo .fg-text {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+body.connect-event-template .hero.promo .fg-text .hero-detail { order: 1; }
+
+body.connect-event-template .hero.promo .fg-text p {
+  margin: 16px 0 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  color: #fff;
+}
+
+/* ------------------------------------------------------------------ *
+ * Intro columns — prose + bullets (left) | photo (right)
+ * ------------------------------------------------------------------ */
+@media (width >= 900px) {
+  body.connect-event-template .columns:not(.sponsors-logos) .row {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--spacing-xxl);
+    align-items: center;
+  }
+}
+
+body.connect-event-template .columns:not(.sponsors-logos) li {
+  margin-block: 0.5em;
+}
+
+body.connect-event-template .columns:not(.sponsors-logos) li p {
+  margin-block: 0;
+}
+
+/* ------------------------------------------------------------------ *
+ * Registration cards — light tiles on white, centered (source look)
+ * ------------------------------------------------------------------ */
+body.connect-event-template .card {
+  background-color: #fff;
+  border: 1px solid #d5dadd;
+  border-radius: 12px;
+  overflow: clip;
+  text-align: center;
+}
+
+body.connect-event-template .card .card-content-container,
+body.connect-event-template .card h3 {
+  color: var(--color-text);
+}
+
+/* Calendar pictograms are small icons, not cover images — don't crop/stretch */
+body.connect-event-template .card .card-picture-container {
+  padding: var(--spacing-l) var(--spacing-l) 0;
+}
+
+body.connect-event-template .card .card-picture-container img {
+  width: auto;
+  max-height: 72px;
+  margin-inline: auto;
+}
+
+/* ------------------------------------------------------------------ *
+ * Sponsor logos — clean row of logos, no chip on the light page.
+ * Source shows plain logos on white with generous spacing, centered.
+ * ------------------------------------------------------------------ */
+body.connect-event-template .sponsors-logos .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xl);
+}
+
+body.connect-event-template .sponsors-logos .col {
+  flex: 0 1 auto;
+}
+
+body.connect-event-template .sponsors-logos .col img {
+  width: auto;
+  height: 64px;
+  max-width: 180px;
+  object-fit: contain; /* preserve each logo's aspect ratio */
+}
+
+/* Tier headings (Platinum / Gold / Silver) centered above each row */
+body.connect-event-template .sponsors-logos-wrapper h3 {
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------ *
+ * Agenda tabs + accordion — light, color-coded (source look).
+ * ------------------------------------------------------------------ */
+
+/* Tab list: SAP blue underline on the active tab, centered */
+body.connect-event-template .advanced-tabs .tab-list button {
+  color: var(--color-text);
+  font-size: var(--body-font-size-l, 18px);
+}
+
+body.connect-event-template .advanced-tabs .tab-list button.is-active {
+  border-bottom-color: var(--color-sap-blue);
+  color: var(--color-sap-blue);
+  font-weight: 500;
+}
+
+/* "Day 1 / Day 2 Agenda" lead-in labels */
+body.connect-event-template .advanced-tabs [role="tabpanel"] p strong {
+  display: block;
+  margin: var(--spacing-l) 0 var(--spacing-s);
+  font-size: 20px;
+}
+
+/* Accordion rows: white row on a light-lavender panel, thin dividers */
+body.connect-event-template .advanced-tabs [role="tabpanel"] {
+  background-color: #ede8fb; /* source's lavender track panel */
+  border-radius: 12px;
+  padding: var(--spacing-s) var(--spacing-l);
+}
+
+body.connect-event-template .agenda-item {
+  border-bottom: 1px solid rgb(0 0 0 / 12%);
+}
+
+body.connect-event-template .agenda-item:last-child {
+  border-bottom: none;
+}
+
+body.connect-event-template .agenda-item-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-m);
+  width: 100%;
+  padding: var(--spacing-m) var(--spacing-s);
+  border: none;
+  background: none;
+  font-family: var(--font-family);
+  font-size: var(--body-font-size-l, 18px);
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+/* Chevron marker (skip when the row has no expandable body) */
+body.connect-event-template .agenda-item-toggle:not(.is-empty)::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--color-sap-blue);
+  border-bottom: 2px solid var(--color-sap-blue);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+/* Color change on click: active row goes SAP-blue text + white ground */
+body.connect-event-template .agenda-item.is-open > .agenda-item-toggle {
+  color: var(--color-sap-blue);
+  font-weight: 500;
+}
+
+body.connect-event-template .agenda-item.is-open > .agenda-item-toggle:not(.is-empty)::after {
+  transform: rotate(225deg);
+}
+
+/* Expandable body: hidden until open */
+body.connect-event-template .agenda-item-body {
+  display: none;
+  padding: 0 var(--spacing-s) var(--spacing-m) var(--spacing-l);
+}
+
+body.connect-event-template .agenda-item.is-open > .agenda-item-body {
+  display: block;
+}
+
+body.connect-event-template .agenda-item-body ul {
+  margin: 0;
+}

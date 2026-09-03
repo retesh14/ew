@@ -67,6 +67,52 @@ function getTabList(tabs, tabPanels) {
   return tabList;
 }
 
+/*
+ * Agenda accordion — turn each session <h3> in a tab panel into a collapsible
+ * row: the h3 becomes a button, and everything after it up to the next h3
+ * (e.g. a track's bullet list) becomes the expandable body. Rows with no body
+ * still toggle an active state (matches the SAP source's color change on click).
+ * Guarded to the connect-event template so the shared finder-tabs usage is
+ * untouched.
+ */
+function decorateAgendaAccordion(panel) {
+  const headings = [...panel.querySelectorAll(':scope h3')];
+  if (!headings.length) return;
+
+  for (const h of headings) {
+    const item = document.createElement('div');
+    item.className = 'agenda-item';
+
+    // Collect body nodes: siblings after the h3 until the next h3.
+    const body = document.createElement('div');
+    body.className = 'agenda-item-body';
+    let sib = h.nextElementSibling;
+    while (sib && sib.tagName !== 'H3') {
+      const next = sib.nextElementSibling;
+      body.append(sib);
+      sib = next;
+    }
+    const hasBody = body.childNodes.length > 0;
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'agenda-item-toggle';
+    btn.ariaExpanded = 'false';
+    if (!hasBody) btn.classList.add('is-empty');
+    // Move the heading text into the button.
+    btn.append(...h.childNodes);
+
+    h.replaceWith(item);
+    item.append(btn);
+    if (hasBody) item.append(body);
+
+    btn.addEventListener('click', () => {
+      const open = item.classList.toggle('is-open');
+      btn.ariaExpanded = String(open);
+    });
+  }
+}
+
 export default function init(el) {
   // Find the top most parent where all tab sections live
   const parent = el.closest('.fragment-content, main');
@@ -95,6 +141,12 @@ export default function init(el) {
     }, []);
 
   const tabList = getTabList(tabs, tabPanels);
+
+  // On the connect-event (VEP) template, agenda session rows become an
+  // accordion, matching the SAP source. Other usages keep flat panels.
+  if (document.body.classList.contains('connect-event-template')) {
+    for (const panel of tabPanels) decorateAgendaAccordion(panel);
+  }
 
   tabs.remove();
   el.append(tabList, ...tabPanels);
