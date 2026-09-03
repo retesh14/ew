@@ -21,7 +21,7 @@ Blank starting point:
 |--------|-------|
 | `/vep/<event-slug>` | One published event page per event |
 | `/vep-templates/connect-event` | The blank template — **copy this**, don't edit it |
-| `/vep-fragment/` | Shared content referenced by many events (e.g. the registration note) |
+| `/vep-fragment/` | Shared + per-event fragments: header, footer, and each event's `<slug>-agenda` and `<slug>-header` |
 | `/vep-media/` | Images: event photos, brand graphics, calendar icons, sponsor logos |
 
 ## Roll out a new event — step by step
@@ -36,12 +36,27 @@ Blank starting point:
    |---------|--------------|
    | **Hero** | Event title, the date + venue line, the one-line subtitle, and the hero image. Keep the date/venue line **above** the title — the theme styles the line before the H1 as the detail line. |
    | **Intro** | Heading, intro paragraph, the "This program will include" bullets, closing line, and the intro image. |
-   | **Agenda** | The two track names in the tab list, then the Day 1 / Day 2 sessions inside each of the two tab panels. Each `advanced-tabs` tab pulls in the section that follows it as its panel — keep one panel section per tab, in order. |
-   | **Registration** | The two day tiles: dates and the "Register now" link (point it at your registration page). The shared note below is a fragment — leave it unless the rule changes. |
+   | **Agenda** | Create a per-event agenda fragment at `/vep-fragment/<event-slug>-agenda` (an `advanced-tabs` block: the tab-label list, then one panel section per tab with the Day 1 / Day 2 sessions). Replace the agenda line on the page with a link to that fragment. Session rows render as a click-to-expand accordion automatically. |
+   | **Registration** | The two day tiles: dates and the "Register now" link (point it at your event's registration page). The Day 2 "requires Day 1" note is inlined in the Day 2 card — edit or remove it as needed. |
    | **Partners** | Sponsor logos under Platinum / Gold / Silver headings. Add/remove logo cells per tier. |
-   | **Metadata** | Page Title, Description, and keep **Template: connect** (this applies the dark theme). |
+   | **Header** | Create a per-event header at `/vep-fragment/<event-slug>-header` (SAP logo + a "Register now" CTA pointing at this event's registration page). The header block loads it automatically for pages under `/vep/<event-slug>`, falling back to the shared `/vep-fragment/header` if absent. |
+   | **Metadata** | Page Title, Description, and keep **Template: connect-event** (this applies the light SAP theme, 72 font, navy hero, agenda accordion, minimal header, light footer). |
 
 4. **Preview** the page, check each section renders, then publish.
+
+## Live sample events (reference)
+
+Two events have been rolled out from this template — compare them to see the
+"one template → many events" pattern in action:
+
+- `/vep/us-2026-sap-connect-days-data-it-houston` — Houston, Sep 2–3, 2026
+- `/vep/us-2026-sap-connect-days-data-it-chicago` — Chicago, Oct 14–15, 2026
+
+Both share the same template, theme, chrome and media; only the event copy,
+dates, agenda fragment, sponsor set and registration URLs differ. This is
+exactly the flow EW's agentic authoring mode automates to roll out events at
+scale: point it at the base template plus a new event's details, and it fills
+the placeholders and writes the page + its per-event agenda/header fragments.
 
 ## Rules that keep the layout working
 
