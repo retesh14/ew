@@ -307,17 +307,36 @@ export function decorateHeaderContent(header) {
  */
 export default async function init(el) {
   const headerMeta = getMetadata('header');
-  // Path-based chrome: /vep event pages load VEP's own (editable) header copy
-  // from vep-fragment. Mirrors the footer block's path-based theme selection.
+  // Path-based chrome: /vep event pages load VEP's own header from vep-fragment.
+  // Each event can ship a per-event header (its Register CTA points at that
+  // event's registration page) at /vep-fragment/<event-slug>-header; if none
+  // exists we fall back to the shared /vep-fragment/header. Mirrors the footer
+  // block's path-based theme selection.
   const pagePath = window.location.pathname.replace(locale.prefix, '');
   const vepHeader = pagePath === '/vep' || pagePath.startsWith('/vep/');
-  const path = headerMeta || (vepHeader ? '/vep-fragment/header' : HEADER_PATH);
-  try {
-    const fragment = await loadFragment(`${locale.prefix}${path}`);
-    fragment.classList.add('header-content');
-    el.append(fragment);
-    decorateHeaderContent(el);
-  } catch (e) {
-    throw Error(e);
+  const eventSlug = vepHeader ? pagePath.replace(/^\/vep\//, '').split('/')[0] : '';
+
+  // Candidate fragment paths, in priority order: explicit metadata, then the
+  // per-event VEP header, then the shared VEP header, then the site default.
+  const candidates = [];
+  if (headerMeta) candidates.push(headerMeta);
+  if (eventSlug) candidates.push(`/vep-fragment/${eventSlug}-header`);
+  if (vepHeader) candidates.push('/vep-fragment/header');
+  candidates.push(HEADER_PATH);
+
+  let fragment;
+  for (const candidate of candidates) {
+    try {
+      // eslint-disable-next-line no-await-in-loop
+      fragment = await loadFragment(`${locale.prefix}${candidate}`);
+      if (fragment) break;
+    } catch (e) {
+      // Try the next candidate (e.g. no per-event header → shared/default).
+    }
   }
+  if (!fragment) return;
+
+  fragment.classList.add('header-content');
+  el.append(fragment);
+  decorateHeaderContent(el);
 }

@@ -26,14 +26,18 @@ function absolutizeMedia(html) {
   return html.replace(/(src|srcset)="\/vep-media\//g, `$1="${ORIGIN}/vep-media/`);
 }
 
-const pages = [
-  { file: 'vep/us-2026-sap-connect-days-data-it-houston.plain.html', daPath: 'vep/us-2026-sap-connect-days-data-it-houston' },
-  { file: 'vep-templates/connect-event.plain.html', daPath: 'vep-templates/connect-event' },
-  { file: 'vep-fragment/registration-note.plain.html', daPath: 'vep-fragment/registration-note' },
-  { file: 'vep-fragment/agenda.plain.html', daPath: 'vep-fragment/agenda' },
-  { file: 'vep-fragment/header.plain.html', daPath: 'vep-fragment/header' },
-  { file: 'vep-fragment/footer.plain.html', daPath: 'vep-fragment/footer' },
-];
+// Auto-discover every VEP document across the three content folders, so newly
+// rolled-out events (and their agenda fragments) publish without editing a list.
+const pages = ['vep', 'vep-templates', 'vep-fragment'].flatMap((dir) => {
+  const abs = path.join(ROOT, dir);
+  if (!fs.existsSync(abs)) return [];
+  return fs.readdirSync(abs)
+    .filter((f) => f.endsWith('.plain.html'))
+    .map((f) => ({
+      file: `${dir}/${f}`,
+      daPath: `${dir}/${f.replace(/\.plain\.html$/, '')}`,
+    }));
+});
 
 function wrapDoc(inner) {
   return `<body>\n  <header></header>\n  <main>${inner}</main>\n  <footer></footer>\n</body>\n`;
