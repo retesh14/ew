@@ -308,6 +308,27 @@ body.connect-event-template .sponsors-logos-wrapper h3 {
   text-align: center;
 }
 
+/* Tier grouping: in the partners section the tier headings and their logo
+   rows land in separate wrappers, so a wrapped logo row (e.g. Gold's 7 logos)
+   would butt right against the next tier heading. Give each logo row bottom
+   breathing room and each following tier heading clear top separation, so
+   every tier reads as a distinct "heading → logos" block.
+   Scoped via :has() to the partners section only (never registration). */
+body.connect-event-template main > .section:has(.sponsors-logos) .default-content-wrapper h3 {
+  margin-top: var(--spacing-xxl);
+  text-align: center;
+}
+
+body.connect-event-template main > .section:has(.sponsors-logos) .block-content:has(.sponsors-logos) {
+  margin-bottom: var(--spacing-s);
+}
+
+/* The tier heading + its logo row sit tight together (small gap), while the
+   gap BEFORE the next tier is large — creating clear visual grouping. */
+body.connect-event-template .sponsors-logos {
+  margin-top: var(--spacing-xs);
+}
+
 /* ------------------------------------------------------------------ *
  * Agenda tabs + accordion — light, color-coded (source look).
  * ------------------------------------------------------------------ */
