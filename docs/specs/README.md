@@ -9,6 +9,8 @@ Designs for bodies of work large enough that the design needs settling before th
   agents, and what a fork inherits.
 - [003-svg-handling](003-svg-handling/spec.md) — what an icon in this project is, and the skill
   that enforces it.
+- [004-asset-variant-rollout](004-asset-variant-rollout/spec.md) — locale image variants applied
+  automatically when a master page is rolled out (PoC).
 
 ## When a spec is warranted
 

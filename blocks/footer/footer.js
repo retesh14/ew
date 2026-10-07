@@ -1,5 +1,6 @@
 import { getConfig, getMetadata } from '../../scripts/ak.js';
 import { loadFragment } from '../fragment/fragment.js';
+import localizedChrome from '../../scripts/utils/localized-chrome.js';
 
 const FOOTER_PATH = '/fragments/nav/footer';
 
@@ -15,7 +16,10 @@ export default async function init(el) {
   // Path-based chrome: /vep event pages load VEP's own (editable) footer copy
   // from vep-fragment; everything else uses the default nav footer.
   const vepFooter = pagePath === '/vep' || pagePath.startsWith('/vep/');
-  const path = footerMeta || (vepFooter ? '/vep-fragment/footer' : FOOTER_PATH);
+  const candidates = footerMeta ? [footerMeta] : [
+    ...localizedChrome(pagePath, 'footer'),
+    vepFooter ? '/vep-fragment/footer' : FOOTER_PATH,
+  ];
 
   // Per-section footer theme: pages under /events use the dark (black) footer to
   // match sap.com/events; everything else (support, partner, home) keeps the
@@ -26,8 +30,17 @@ export default async function init(el) {
     el.classList.add('footer-events');
   }
 
+  let fragment;
+  for (const candidate of candidates) {
+    try {
+      // eslint-disable-next-line no-await-in-loop
+      fragment = await loadFragment(`${locale.prefix}${candidate}`);
+      break;
+    } catch { /* not authored at this level — try the next one */ }
+  }
+  if (!fragment) throw Error(`Couldn't fetch footer: ${candidates.join(', ')}`);
+
   try {
-    const fragment = await loadFragment(`${locale.prefix}${path}`);
     fragment.classList.add('footer-content');
 
     const sections = [...fragment.querySelectorAll('.section')];

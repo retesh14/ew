@@ -1,5 +1,6 @@
 import { getConfig, getMetadata } from '../../scripts/ak.js';
 import { loadFragment } from '../fragment/fragment.js';
+import localizedChrome from '../../scripts/utils/localized-chrome.js';
 import { setColorScheme } from '../section-metadata/section-metadata.js';
 
 const { locale } = getConfig();
@@ -320,6 +321,7 @@ export default async function init(el) {
   // per-event VEP header, then the shared VEP header, then the site default.
   const candidates = [];
   if (headerMeta) candidates.push(headerMeta);
+  candidates.push(...localizedChrome(pagePath, 'header'));
   if (eventSlug) candidates.push(`/vep-fragment/${eventSlug}-header`);
   if (vepHeader) candidates.push('/vep-fragment/header');
   candidates.push(HEADER_PATH);
