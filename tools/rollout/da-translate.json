@@ -1,18 +1,59 @@
 {
   "config": {
-    "total": 9,
+    "total": 10,
     "offset": 0,
-    "limit": 9,
+    "limit": 10,
     "data": [
-      { "key": "source.language", "value": "English", "description": "Source of truth for rollout and translation." },
-      { "key": "sync.conflict.behavior", "value": "merge, overwrite", "description": "" },
-      { "key": "translate.conflict.behavior", "value": "merge, overwrite", "description": "" },
-      { "key": "rollout.conflict.behavior", "value": "merge, overwrite", "description": "Merge first: keeps a market's local image when the master is rolled out again." },
-      { "key": "copy.conflict.behavior", "value": "merge, overwrite", "description": "" },
-      { "key": "translation.service.name", "value": "Google", "description": "" },
-      { "key": "translation.service.all.env", "value": "prod", "description": "" },
-      { "key": "translation.service.prod.link", "value": "https://cloud.google.com/translate/docs/overview", "description": "" },
-      { "key": "translation.service.prod.origin", "value": "https://translate.da.live/google", "description": "" }
+      {
+        "key": "source.language",
+        "value": "English",
+        "description": "Source of truth for rollout and translation."
+      },
+      {
+        "key": "sync.conflict.behavior",
+        "value": "merge, overwrite",
+        "description": ""
+      },
+      {
+        "key": "translate.conflict.behavior",
+        "value": "merge, overwrite",
+        "description": ""
+      },
+      {
+        "key": "rollout.conflict.behavior",
+        "value": "merge, overwrite",
+        "description": "Merge first: keeps a market's local image when the master is rolled out again."
+      },
+      {
+        "key": "copy.conflict.behavior",
+        "value": "merge, overwrite",
+        "description": ""
+      },
+      {
+        "key": "translation.service.name",
+        "value": "Google",
+        "description": ""
+      },
+      {
+        "key": "translation.service.all.env",
+        "value": "prod",
+        "description": ""
+      },
+      {
+        "key": "translation.service.prod.link",
+        "value": "https://cloud.google.com/translate/docs/overview",
+        "description": ""
+      },
+      {
+        "key": "translation.service.prod.origin",
+        "value": "https://translate.da.live/google",
+        "description": ""
+      },
+      {
+        "key": "complete.aem.preview",
+        "value": "true",
+        "description": "Preview market pages when a rollout completes (unless merge conflicts)."
+      }
     ]
   },
   "languages": {
@@ -20,9 +61,30 @@
     "offset": 0,
     "limit": 3,
     "data": [
-      { "name": "English", "code": "en", "translate type": "Machine Translation", "location": "/vep-global/en", "locales": "/vep-global/en/us, /vep-global/en/gb", "actions": "Skip, Translate, Rollout" },
-      { "name": "German", "code": "de", "translate type": "Machine Translation", "location": "/vep-global/de", "locales": "/vep-global/de/de, /vep-global/de/ch", "actions": "Skip, Translate, Rollout" },
-      { "name": "French", "code": "fr", "translate type": "Machine Translation", "location": "/vep-global/fr", "locales": "/vep-global/fr/fr, /vep-global/fr/ch", "actions": "Skip, Translate, Rollout" }
+      {
+        "name": "English",
+        "code": "en",
+        "translate type": "Machine Translation",
+        "location": "/vep-global/en",
+        "locales": "/vep-global/en/us, /vep-global/en/gb",
+        "actions": "Skip, Translate, Rollout"
+      },
+      {
+        "name": "German",
+        "code": "de",
+        "translate type": "Machine Translation",
+        "location": "/vep-global/de",
+        "locales": "/vep-global/de/de, /vep-global/de/ch",
+        "actions": "Skip, Translate, Rollout"
+      },
+      {
+        "name": "French",
+        "code": "fr",
+        "translate type": "Machine Translation",
+        "location": "/vep-global/fr",
+        "locales": "/vep-global/fr/fr, /vep-global/fr/ch",
+        "actions": "Skip, Translate, Rollout"
+      }
     ]
   },
   "custom-doc-rules": {
@@ -30,8 +92,14 @@
     "offset": 0,
     "limit": 2,
     "data": [
-      { "block": "metadata", "rule": "translate col 2 if col 1 is \"title\" or \"description\"" },
-      { "block": "section-metadata", "rule": "do-not-translate" }
+      {
+        "block": "metadata",
+        "rule": "translate col 2 if col 1 is \"title\" or \"description\""
+      },
+      {
+        "block": "section-metadata",
+        "rule": "do-not-translate"
+      }
     ]
   },
   "dnt-content-rules": {
@@ -39,7 +107,9 @@
     "offset": 0,
     "limit": 1,
     "data": [
-      { "content": "SAP" }
+      {
+        "content": "SAP"
+      }
     ]
   },
   "dnt-sheet-rules": {
@@ -47,10 +117,19 @@
     "offset": 0,
     "limit": 1,
     "data": [
-      { "pattern": "beginsWith(http:// || https://)", "action": "dnt" }
+      {
+        "pattern": "beginsWith(http:// || https://)",
+        "action": "dnt"
+      }
     ]
   },
   ":version": 3,
-  ":names": ["config", "languages", "custom-doc-rules", "dnt-content-rules", "dnt-sheet-rules"],
+  ":names": [
+    "config",
+    "languages",
+    "custom-doc-rules",
+    "dnt-content-rules",
+    "dnt-sheet-rules"
+  ],
   ":type": "multi-sheet"
 }
