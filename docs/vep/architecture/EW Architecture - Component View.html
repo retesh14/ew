@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>EW Architecture — Component View</title>
+<style>
+  :root {
+    --ink: #1b1f24; --muted: #5b6573; --line: #c9d1db; --bg: #f6f8fa;
+    --author: #e8f1ff; --author-b: #3b82f6;
+    --code: #eef7ee; --code-b: #2f9e44;
+    --eds: #f3edff; --eds-b: #7c3aed;
+    --deliver: #fff4e6; --deliver-b: #e8590c;
+    --int: #fdf2f8; --int-b: #c2255c;
+    --built: #2f9e44; --planned: #d97706;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 13px/1.35 "Segoe UI", system-ui, -apple-system, sans-serif; color: var(--ink); background: #fff; }
+  .slide { width: 1600px; height: 900px; padding: 28px 36px; display: grid; grid-template-rows: auto 1fr auto; gap: 14px; break-after: page; }
+  header h1 { margin: 0; font-size: 26px; }
+  header p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+  .grid { display: grid; grid-template-columns: 190px 1fr 1fr 260px; grid-template-rows: auto 1fr auto; gap: 14px; }
+  .lane { border: 2px solid; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; position: relative; }
+  .lane h2 { margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: .04em; }
+  .lane .sub { color: var(--muted); font-size: 12px; margin-top: -4px; }
+  .people { grid-row: 1 / 4; background: var(--bg); border-color: var(--line); }
+  .author { background: var(--author); border-color: var(--author-b); }
+  .code { background: var(--code); border-color: var(--code-b); }
+  .eds { grid-column: 2 / 4; background: var(--eds); border-color: var(--eds-b); }
+  .deliver { grid-column: 2 / 4; background: var(--deliver); border-color: var(--deliver-b); }
+  .int { grid-column: 4; grid-row: 1 / 4; background: var(--int); border-color: var(--int-b); }
+  .box { background: #fff; border: 1px solid var(--line); border-radius: 7px; padding: 7px 9px; }
+  .box b { display: block; font-size: 13px; }
+  .box span { color: var(--muted); font-size: 11.5px; }
+  .box.planned { border: 1.5px dashed var(--planned); }
+  .box.built { border-left: 4px solid var(--built); }
+  .row { display: flex; gap: 8px; }
+  .row > .box { flex: 1; }
+  .actor { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 7px 10px; text-align: center; }
+  .actor b { display: block; }
+  .actor span { color: var(--muted); font-size: 11px; }
+  .step { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%;
+          background: var(--ink); color: #fff; font-size: 11px; font-weight: 700; margin-right: 6px; flex: none; }
+  .flow { display: block; font-size: 11.5px; padding-left: 26px; text-indent: -26px; }
+  .flow .step { text-indent: 0; }
+  .box b .step { width: 17px; height: 17px; font-size: 10px; margin: 0 0 0 6px; float: right; color: #fff; }
+  .flows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 18px; }
+  footer { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; border-top: 1px solid var(--line); padding-top: 10px; }
+  .legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); align-items: center; }
+  .sw { display: inline-block; width: 22px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; background: #fff; }
+  .sw.built { border-left: 4px solid var(--built); border: 1px solid var(--line); border-left-width: 4px; border-left-color: var(--built); }
+  .sw.planned { border: 1.5px dashed var(--planned); }
+  .tag { font-size: 10.5px; padding: 1px 6px; border-radius: 9px; background: #fff; border: 1px solid var(--line); color: var(--muted); }
+  code { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; background: rgba(0,0,0,.05); padding: 0 3px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <header>
+    <h1>VEP Event Sites on AEM Experience Workspace — Component View</h1>
+    <p>Event pages authored in <b>AEM Experience Workspace</b> (not AEM author / JCR or Universal Editor), code in GitHub, delivered by Edge Delivery. Reference: SAP Connect Day Houston.</p>
+  </header>
+
+  <div class="grid">
+    <!-- People -->
+    <section class="lane people">
+      <h2>People</h2>
+      <div class="actor"><b>Event marketers / authors</b><span>create &amp; update event pages</span></div>
+      <div class="actor"><b>AI agent</b><span>migrates pages, drafts events from template, drafts code</span></div>
+      <div class="actor"><b>Developers</b><span>blocks, template, integrations</span></div>
+      <div class="actor"><b>QA / reviewers</b><span>branch URLs, quality checks</span></div>
+      <div class="actor"><b>Release manager</b><span>approves PRs, publishes</span></div>
+      <div class="actor"><b>Visitors</b><span>browse, register</span></div>
+    </section>
+
+    <!-- Authoring -->
+    <section class="lane author">
+      <h2>Content — AEM Experience Workspace</h2>
+      <div class="sub">document-based · no AEM author / JCR · Preview vs Publish</div>
+      <div class="box built"><b>Event template<span class="step">1</span></b><span><code>/vep-templates/connect-event</code> — authors copy it to start a new event</span></div>
+      <div class="row">
+        <div class="box built"><b>Event pages</b><span><code>/vep/&lt;event&gt;</code>, <code>…/registration</code></span></div>
+        <div class="box built"><b>Shared fragments</b><span><code>/vep-fragment/</code> header, footer, agenda</span></div>
+      </div>
+      <div class="row">
+        <div class="box built"><b>Media</b><span><code>/vep-media/</code> images, logos</span></div>
+        <div class="box built"><b>Form definition</b><span>authorable labels &amp; options (sheet)</span></div>
+      </div>
+      <div class="box planned"><b>Translation &amp; market rollout</b><span><code>.da/translate</code>: language masters → markets; image variants per market (PoC done)</span></div>
+    </section>
+
+    <!-- Code -->
+    <section class="lane code">
+      <h2>Code — GitHub</h2>
+      <div class="sub">client-owned org · buildless HTML/CSS/JS · branches are environments</div>
+      <div class="row">
+        <div class="box built"><b>Blocks</b><span>hero · columns · card · advanced-tabs (agenda) · form · fragment · header · footer</span></div>
+        <div class="box built"><b>Template</b><span><code>templates/connect-event</code> theme (light, SAP 72 font)</span></div>
+      </div>
+      <div class="row">
+        <div class="box built"><b>Page engine + site settings</b><span>Adobe's standard page-loading code, kept unchanged, plus one settings file for this site</span></div>
+        <div class="box built"><b>Header &amp; footer by URL</b><span>each event page gets its own header and footer from its web address, or a shared one</span></div>
+      </div>
+      <div class="box planned"><b>Governance<span class="step">4</span></b><span>protected <code>main</code>, PR review, CODEOWNERS, required lint + PageSpeed checks, bot identity for the agent</span></div>
+    </section>
+
+    <!-- EDS -->
+    <section class="lane eds">
+      <h2>Edge Delivery Services</h2>
+      <div class="row">
+        <div class="box built"><b>Admin API<span class="step">2</span></b><span>preview / publish per page; bulk jobs; roles (who may publish)</span></div>
+        <div class="box built"><b>Content &amp; media bus</b><span>pages, fragments, sheets (JSON), images</span></div>
+        <div class="box built"><b>Code bus<span class="step">3</span></b><span>synced from GitHub by AEM Code Sync on every push</span></div>
+        <div class="box built"><b>Hosts</b><span><code>&lt;branch&gt;--&lt;repo&gt;--&lt;org&gt;.aem.page</code> (preview) · <code>.aem.live</code> (live)</span></div>
+      </div>
+      <div class="row">
+        <div class="box planned"><b>Site config (Config Service)</b><span>access &amp; publish roles, preview authentication, CDN push invalidation, Experience Workspace translate/MSM config</span></div>
+        <div class="box built"><b>Render pipeline</b><span>sections → blocks; fragments (header, footer, agenda) resolve before outer blocks; template CSS from page metadata</span></div>
+        <div class="box built"><b>Quality signals</b><span>PageSpeed check on every PR; Real User Monitoring (RUM) in production</span></div>
+      </div>
+    </section>
+
+    <!-- Delivery -->
+    <section class="lane deliver">
+      <h2>Delivery</h2>
+      <div class="row">
+        <div class="box planned"><b>Production CDN + domain<span class="step">5</span></b><span>e.g. <code>events.&lt;client&gt;.com</code> → <code>main--…aem.live</code>; push invalidation on publish</span></div>
+        <div class="box planned"><b>QA domain (protected)</b><span><code>events.&lt;client&gt;-qa.com</code> → preview host; IP allow-list / auth</span></div>
+        <div class="box built"><b>Browser</b><span>static HTML from the edge; blocks load on demand; target Lighthouse 100</span></div>
+      </div>
+    </section>
+
+    <!-- Integrations -->
+    <section class="lane int">
+      <h2>Integrations</h2>
+      <div class="box planned"><b>SAP Forms service<span class="step">6</span></b><span><code>forms.services.sap.com</code>: dropdown lists, consents, submission → CRM. Our form submit is stubbed today</span></div>
+      <div class="box planned"><b>App Builder actions</b><span>server-side: live event data (sessions, seats), market image variants after rollout; secrets stay here</span></div>
+      <div class="box planned"><b>AEM Assets / Dynamic Media</b><span>approved assets by URL (OpenAPI); variants per market</span></div>
+      <div class="box planned"><b>Event platform</b><span>registration ops, badges, payment stay in the event system (e.g. RainFocus) — linked, not replaced</span></div>
+      <div class="box"><b>Analytics / RUM</b><span>Edge Delivery RUM built in; client martech tags</span></div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="flows">
+      <div class="flow"><span class="step">1</span>Author (or agent) copies the template, fills event details, previews in Experience Workspace</div>
+      <div class="flow"><span class="step">2</span>Preview / Publish → Admin API → content bus (fragments before page)</div>
+      <div class="flow"><span class="step">3</span>Developer pushes a branch → Code Sync → code bus → branch preview URL</div>
+      <div class="flow"><span class="step">4</span>PR checks (lint, PageSpeed) + review → merge to <code>main</code> = code release</div>
+      <div class="flow"><span class="step">5</span>Visitor → CDN → <code>.aem.live</code>: page HTML + blocks/CSS</div>
+      <div class="flow"><span class="step">6</span>Register → form block → SAP Forms service (target); live data via App Builder</div>
+    </div>
+    <div class="legend">
+      <span><span class="sw built"></span>Built in POC</span>
+      <span><span class="sw planned"></span>Target / to build</span>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

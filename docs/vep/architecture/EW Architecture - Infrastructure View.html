@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>EW Architecture — Infrastructure View</title>
+<style>
+  body { margin: 0; background: #fff; }
+  .slide { width: 1600px; height: 900px; position: relative; overflow: hidden; }
+  .legend { position: absolute; right: 40px; top: 24px; display: flex; gap: 16px; font: 12px "Segoe UI", system-ui, sans-serif; color: #5b6573; align-items: center; }
+  .k { display: inline-block; width: 26px; height: 0; vertical-align: 3px; margin-right: 6px; border-top: 2px dashed #1b1f24; }
+  .k.plan { border-top-color: #d97706; }
+</style>
+</head>
+<body>
+<div class="slide">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" font-family="Segoe UI, system-ui, -apple-system, sans-serif">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1b1f24"/></marker><marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d97706"/></marker></defs>
+<text x="40" y="38" font-size="24" font-weight="700" fill="#1b1f24">VEP on AEM Experience Workspace — Infrastructure View</text>
+<text x="40" y="60" font-size="13" fill="#5b6573">Same layout as our JCR-backed EDS diagram: AEM author is replaced by AEM Experience Workspace (document-based, no AEM author / JCR, no Universal Editor).</text>
+<circle cx="204" cy="90" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M190,116 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="226" cy="90" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M212,116 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="215" cy="102" r="8" fill="#fff" stroke="#1b1f24" stroke-width="2"/><path d="M201,128 a14,13 0 0 1 28,0" fill="#fff" stroke="#1b1f24" stroke-width="2"/>
+<text x="215" y="146" text-anchor="middle" font-size="13" fill="#1b1f24">EW Administrators</text>
+<text x="215" y="161" text-anchor="middle" font-size="10.5" fill="#5b6573">org &amp; site config, permissions</text>
+<circle cx="459" cy="90" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M445,116 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="481" cy="90" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M467,116 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="470" cy="102" r="8" fill="#fff" stroke="#1b1f24" stroke-width="2"/><path d="M456,128 a14,13 0 0 1 28,0" fill="#fff" stroke="#1b1f24" stroke-width="2"/>
+<text x="470" y="146" text-anchor="middle" font-size="13" fill="#1b1f24">Content Authors</text>
+<text x="470" y="161" text-anchor="middle" font-size="10.5" fill="#5b6573">event marketers</text>
+<circle cx="629" cy="90" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M615,116 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="651" cy="90" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M637,116 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="640" cy="102" r="8" fill="#fff" stroke="#1b1f24" stroke-width="2"/><path d="M626,128 a14,13 0 0 1 28,0" fill="#fff" stroke="#1b1f24" stroke-width="2"/>
+<text x="640" y="146" text-anchor="middle" font-size="13" fill="#1b1f24">AI Agent</text>
+<text x="640" y="161" text-anchor="middle" font-size="10.5" fill="#5b6573">migrates, drafts from template</text>
+<circle cx="864" cy="90" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M850,116 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="886" cy="90" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M872,116 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="875" cy="102" r="8" fill="#fff" stroke="#1b1f24" stroke-width="2"/><path d="M861,128 a14,13 0 0 1 28,0" fill="#fff" stroke="#1b1f24" stroke-width="2"/>
+<text x="875" y="146" text-anchor="middle" font-size="13" fill="#1b1f24">Edge Delivery Administrators</text>
+<text x="875" y="161" text-anchor="middle" font-size="10.5" fill="#5b6573">(Helix) site config, publish roles</text>
+<circle cx="1344" cy="90" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M1330,116 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="1366" cy="90" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M1352,116 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="1355" cy="102" r="8" fill="#fff" stroke="#1b1f24" stroke-width="2"/><path d="M1341,128 a14,13 0 0 1 28,0" fill="#fff" stroke="#1b1f24" stroke-width="2"/>
+<text x="1355" y="146" text-anchor="middle" font-size="13" fill="#1b1f24">End Users</text>
+<text x="1355" y="161" text-anchor="middle" font-size="10.5" fill="#5b6573">visitors</text>
+<rect x="40" y="195" width="1080" height="495" fill="#fff" stroke="#3d4450" stroke-width="2"/>
+<rect x="40" y="195" width="46" height="44" fill="#232f3e"/>
+<path d="M52,224 h22 a6,6 0 0 0 -1,-11.8 a8,8 0 0 0 -15.4,-1.6 a6,6 0 0 0 -5.6,13.4 z" fill="none" stroke="#fff" stroke-width="1.8"/>
+<text x="98" y="222" font-size="14" fill="#1b1f24">Adobe Infrastructure</text>
+<rect x="60" y="250" width="510" height="345" fill="#fff" stroke="#f08c2b" stroke-width="2"/>
+<text x="558" y="268" text-anchor="end" font-size="12" font-weight="600" fill="#f08c2b">AEM Experience Workspace</text>
+<rect x="78" y="285" width="252" height="295" fill="none" stroke="#9aa3ad" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="204.0" y="302" text-anchor="middle" font-size="11.5" fill="#1b1f24">Services</text>
+<rect x="97" y="314" width="62" height="62" rx="3" fill="#e7157b"/>
+<g transform="translate(97 314) scale(1.55)" color="#e7157b"><circle cx="20" cy="20" r="7" fill="none" stroke="#fff" stroke-width="2.4"/><line x1="20" y1="20" x2="20" y2="5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" transform="rotate(0 20 20)"/><line x1="20" y1="20" x2="20" y2="5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" transform="rotate(45 20 20)"/><line x1="20" y1="20" x2="20" y2="5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" transform="rotate(90 20 20)"/><line x1="20" y1="20" x2="20" y2="5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" transform="rotate(135 20 20)"/><line x1="20" y1="20" x2="20" y2="5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" transform="rotate(180 20 20)"/><line x1="20" y1="20" x2="20" y2="5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" transform="rotate(225 20 20)"/><line x1="20" y1="20" x2="20" y2="5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" transform="rotate(270 20 20)"/><line x1="20" y1="20" x2="20" y2="5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" transform="rotate(315 20 20)"/><circle cx="20" cy="20" r="4" fill="currentColor"/></g>
+<text x="128.0" y="392" text-anchor="middle" font-size="12.5" fill="#1b1f24">Config</text>
+<text x="128.0" y="406" text-anchor="middle" font-size="10.5" fill="#5b6573">org / site / translate</text>
+<rect x="237" y="314" width="62" height="62" rx="3" fill="#8c4fff"/>
+<g transform="translate(237 314) scale(1.55)" color="#8c4fff"><ellipse cx="20" cy="9" rx="11" ry="4" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M9,9 v22 a11,4 0 0 0 22,0 v-22" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M9,20 a11,4 0 0 0 22,0" fill="none" stroke="#fff" stroke-width="2.2"/></g>
+<text x="268.0" y="392" text-anchor="middle" font-size="12.5" fill="#1b1f24">Document store</text>
+<text x="268.0" y="406" text-anchor="middle" font-size="10.5" fill="#5b6573">versions</text>
+<rect x="97" y="449" width="62" height="62" rx="3" fill="#ed7100"/>
+<g transform="translate(97 449) scale(1.55)" color="#ed7100"><rect x="7" y="7" width="11" height="11" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><rect x="22" y="7" width="11" height="11" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><rect x="7" y="22" width="11" height="11" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M27.5,22 v11 M22,27.5 h11" stroke="#fff" stroke-width="2.4"/></g>
+<text x="128.0" y="527" text-anchor="middle" font-size="12.5" fill="#1b1f24">Apps &amp; plugins</text>
+<text x="128.0" y="541" text-anchor="middle" font-size="10.5" fill="#5b6573">Translate · MSM</text>
+<rect x="237" y="449" width="62" height="62" rx="3" fill="#01a88d"/>
+<g transform="translate(237 449) scale(1.55)" color="#01a88d"><path d="M8,15 h22 m-5,-5 l5,5 l-5,5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/><path d="M32,26 h-22 m5,-5 l-5,5 l5,5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></g>
+<text x="268.0" y="527" text-anchor="middle" font-size="12.5" fill="#1b1f24">APIs</text>
+<text x="268.0" y="541" text-anchor="middle" font-size="10.5" fill="#5b6573">DA source API</text>
+<rect x="348" y="285" width="204" height="295" fill="none" stroke="#9aa3ad" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="450.0" y="302" text-anchor="middle" font-size="11.5" fill="#1b1f24">Authored Content</text>
+<rect x="419" y="314" width="62" height="62" rx="3" fill="#01a88d"/>
+<g transform="translate(419 314) scale(1.55)" color="#01a88d"><rect x="6" y="6" width="24" height="26" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><line x1="10" y1="13" x2="25" y2="13" stroke="#fff" stroke-width="2"/><line x1="10" y1="19" x2="20" y2="19" stroke="#fff" stroke-width="2"/><circle cx="27" cy="27" r="5.5" fill="none" stroke="#fff" stroke-width="2.2"/><line x1="31" y1="31" x2="35" y2="35" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></g>
+<text x="450.0" y="392" text-anchor="middle" font-size="12.5" fill="#1b1f24">Documents &amp; sheets</text>
+<text x="450.0" y="406" text-anchor="middle" font-size="10.5" fill="#5b6573">pages · fragments · forms</text>
+<rect x="419" y="449" width="62" height="62" rx="3" fill="#ed7100"/>
+<g transform="translate(419 449) scale(1.55)" color="#ed7100"><rect x="5" y="10" width="20" height="16" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M12,14 l7,4 l-7,4 z" fill="#fff"/><circle cx="31" cy="12" r="3.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="31" cy="27" r="3.5" fill="none" stroke="#fff" stroke-width="2"/><line x1="25" y1="16" x2="28" y2="14" stroke="#fff" stroke-width="2"/><line x1="25" y1="21" x2="28" y2="25" stroke="#fff" stroke-width="2"/></g>
+<text x="450.0" y="527" text-anchor="middle" font-size="12.5" fill="#1b1f24">Media</text>
+<text x="450.0" y="541" text-anchor="middle" font-size="10.5" fill="#5b6573">images · logos</text>
+<rect x="615" y="250" width="485" height="345" fill="#fff" stroke="#f08c2b" stroke-width="2"/>
+<text x="1088" y="268" text-anchor="end" font-size="12" font-weight="600" fill="#f08c2b">Edge Delivery Services (EDS)</text>
+<rect x="633" y="285" width="158" height="295" fill="none" stroke="#9aa3ad" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="712.0" y="302" text-anchor="middle" font-size="11.5" fill="#1b1f24">Published Content</text>
+<rect x="681" y="314" width="62" height="62" rx="3" fill="#01a88d"/>
+<g transform="translate(681 314) scale(1.55)" color="#01a88d"><rect x="6" y="6" width="24" height="26" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><line x1="10" y1="13" x2="25" y2="13" stroke="#fff" stroke-width="2"/><line x1="10" y1="19" x2="20" y2="19" stroke="#fff" stroke-width="2"/><circle cx="27" cy="27" r="5.5" fill="none" stroke="#fff" stroke-width="2.2"/><line x1="31" y1="31" x2="35" y2="35" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></g>
+<text x="712.0" y="392" text-anchor="middle" font-size="12.5" fill="#1b1f24">Content</text>
+<text x="712.0" y="406" text-anchor="middle" font-size="10.5" fill="#5b6573">preview · live</text>
+<rect x="681" y="449" width="62" height="62" rx="3" fill="#ed7100"/>
+<g transform="translate(681 449) scale(1.55)" color="#ed7100"><rect x="5" y="10" width="20" height="16" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M12,14 l7,4 l-7,4 z" fill="#fff"/><circle cx="31" cy="12" r="3.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="31" cy="27" r="3.5" fill="none" stroke="#fff" stroke-width="2"/><line x1="25" y1="16" x2="28" y2="14" stroke="#fff" stroke-width="2"/><line x1="25" y1="21" x2="28" y2="25" stroke="#fff" stroke-width="2"/></g>
+<text x="712.0" y="527" text-anchor="middle" font-size="12.5" fill="#1b1f24">Media</text>
+<text x="712.0" y="541" text-anchor="middle" font-size="10.5" fill="#5b6573">media bus</text>
+<rect x="806" y="285" width="158" height="295" fill="none" stroke="#9aa3ad" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="885.0" y="302" text-anchor="middle" font-size="11.5" fill="#1b1f24">Site Config &amp; Code (Helix)</text>
+<rect x="854" y="314" width="62" height="62" rx="3" fill="#e7157b"/>
+<g transform="translate(854 314) scale(1.55)" color="#e7157b"><line x1="11" y1="7" x2="11" y2="33" stroke="#fff" stroke-width="2.2"/><rect x="7" y="14" width="8" height="5" rx="1.5" fill="#fff"/><line x1="20" y1="7" x2="20" y2="33" stroke="#fff" stroke-width="2.2"/><rect x="16" y="24" width="8" height="5" rx="1.5" fill="#fff"/><line x1="29" y1="7" x2="29" y2="33" stroke="#fff" stroke-width="2.2"/><rect x="25" y="12" width="8" height="5" rx="1.5" fill="#fff"/></g>
+<text x="885.0" y="392" text-anchor="middle" font-size="12.5" fill="#1b1f24">Config</text>
+<text x="885.0" y="406" text-anchor="middle" font-size="10.5" fill="#5b6573">Config Service</text>
+<rect x="854" y="449" width="62" height="62" rx="3" fill="#c925d1"/>
+<g transform="translate(854 449) scale(1.55)" color="#c925d1"><rect x="5" y="7" width="30" height="26" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><line x1="5" y1="13" x2="35" y2="13" stroke="#fff" stroke-width="2"/><path d="M15,19 l-4,4 l4,4 M25,19 l4,4 l-4,4 M22,18 l-4,10" fill="none" stroke="#fff" stroke-width="2"/></g>
+<text x="885.0" y="527" text-anchor="middle" font-size="12.5" fill="#1b1f24">Code</text>
+<text x="885.0" y="541" text-anchor="middle" font-size="10.5" fill="#5b6573">code bus</text>
+<rect x="985" y="285" width="96" height="295" fill="#fff" stroke="#8c4fff" stroke-width="2"/>
+<rect x="1001" y="285" width="64" height="58" fill="#8c4fff"/>
+<g transform="translate(1013 294) scale(1.0)"><circle cx="20" cy="20" r="13" fill="none" stroke="#fff" stroke-width="2.2"/><ellipse cx="20" cy="20" rx="6" ry="13" fill="none" stroke="#fff" stroke-width="2"/><line x1="7" y1="20" x2="33" y2="20" stroke="#fff" stroke-width="2"/></g>
+<text x="1033" y="368" text-anchor="middle" font-size="14" font-weight="600" fill="#1b1f24">Adobe CDN</text>
+<text x="1033" y="387" text-anchor="middle" font-size="11.5" fill="#5b6573">aem.page</text>
+<text x="1033" y="402" text-anchor="middle" font-size="11.5" fill="#5b6573">aem.live</text>
+<text x="1033" y="432" text-anchor="middle" font-size="10.5" fill="#5b6573">+ a preview URL</text>
+<text x="1033" y="446" text-anchor="middle" font-size="10.5" fill="#5b6573">per Git branch</text>
+<rect x="60" y="612" width="1040" height="52" fill="#fff" stroke="#d97706" stroke-width="2" stroke-dasharray="7 5"/>
+<rect x="60" y="612" width="52" height="52" fill="#d97706"/>
+<g transform="translate(64 616) scale(1.1)"><path d="M20,5 l13,7.5 v15 l-13,7.5 l-13,-7.5 v-15 z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M16,15 l8,5 l-8,5 z" fill="#fff"/></g>
+<text x="128" y="636.0" font-size="16" fill="#1b1f24">App Builder (Adobe I/O Runtime) — planned</text>
+<text x="128" y="653.0" font-size="11.5" fill="#5b6573">server-side actions: live event data (sessions, seats) · market image variants after rollout · secrets never reach the browser</text>
+<rect x="1170" y="195" width="390" height="495" fill="#fff" stroke="#f08c2b" stroke-width="2"/>
+<text x="1548" y="213" text-anchor="end" font-size="12" font-weight="600" fill="#f08c2b">Akamai — client CDN</text>
+<rect x="1192" y="250" width="346" height="345" fill="none" stroke="#9aa3ad" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="1365.0" y="267" text-anchor="middle" font-size="11.5" fill="#1b1f24">Services</text>
+<rect x="1240" y="285" width="62" height="62" rx="3" fill="#8c4fff"/>
+<g transform="translate(1240 285) scale(1.55)" color="#8c4fff"><circle cx="20" cy="20" r="13" fill="none" stroke="#fff" stroke-width="2.2"/><ellipse cx="20" cy="20" rx="6" ry="13" fill="none" stroke="#fff" stroke-width="2"/><line x1="7" y1="20" x2="33" y2="20" stroke="#fff" stroke-width="2"/></g>
+<text x="1271.0" y="363" text-anchor="middle" font-size="12.5" fill="#1b1f24">Redirects</text>
+<text x="1271.0" y="377" text-anchor="middle" font-size="10.5" fill="#5b6573">old event URLs</text>
+<rect x="1398" y="285" width="62" height="62" rx="3" fill="#01a88d"/>
+<g transform="translate(1398 285) scale(1.55)" color="#01a88d"><path d="M23,5 l-11,17 h8 l-3,13 l12,-18 h-8 z" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></g>
+<text x="1429.0" y="363" text-anchor="middle" font-size="12.5" fill="#1b1f24">Edge Workers</text>
+<text x="1429.0" y="377" text-anchor="middle" font-size="10.5" fill="#5b6573">routing, headers</text>
+<rect x="1240" y="430" width="62" height="62" rx="3" fill="#7aa116"/>
+<g transform="translate(1240 430) scale(1.55)" color="#7aa116"><ellipse cx="20" cy="11" rx="13" ry="4" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M7,11 l4,20 a9,3 0 0 0 18,0 l4,-20" fill="none" stroke="#fff" stroke-width="2.2"/></g>
+<text x="1271.0" y="508" text-anchor="middle" font-size="12.5" fill="#1b1f24">Cache</text>
+<text x="1271.0" y="522" text-anchor="middle" font-size="10.5" fill="#5b6573">push invalidation</text>
+<rect x="1398" y="430" width="62" height="62" rx="3" fill="#dd344c"/>
+<g transform="translate(1398 430) scale(1.55)" color="#dd344c"><rect x="10" y="18" width="20" height="15" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M14,18 v-5 a6,6 0 0 1 12,0 v5" fill="none" stroke="#fff" stroke-width="2.2"/><circle cx="20" cy="25" r="2" fill="#fff"/></g>
+<text x="1429.0" y="508" text-anchor="middle" font-size="12.5" fill="#1b1f24">Authentication</text>
+<text x="1429.0" y="522" text-anchor="middle" font-size="10.5" fill="#5b6573">protect QA site</text>
+<rect x="40" y="712" width="1520" height="160" fill="#fff" stroke="#3d4450" stroke-width="2"/>
+<rect x="40" y="712" width="46" height="44" fill="#232f3e"/>
+<path d="M52,741 h22 a6,6 0 0 0 -1,-11.8 a8,8 0 0 0 -15.4,-1.6 a6,6 0 0 0 -5.6,13.4 z" fill="none" stroke="#fff" stroke-width="1.8"/>
+<text x="98" y="739" font-size="14" fill="#1b1f24">SAP Infrastructure</text>
+<rect x="330" y="735" width="480" height="52" fill="#fff" stroke="#5a6b86" stroke-width="2"/>
+<rect x="330" y="735" width="52" height="52" fill="#5a6b86"/>
+<g transform="translate(334 739) scale(1.1)"><rect x="11" y="6" width="18" height="28" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><line x1="15" y1="12" x2="25" y2="12" stroke="#fff" stroke-width="2"/><line x1="15" y1="17" x2="25" y2="17" stroke="#fff" stroke-width="2"/><line x1="15" y1="22" x2="25" y2="22" stroke="#fff" stroke-width="2"/></g>
+<text x="398" y="759.0" font-size="16" fill="#1b1f24">Enterprise GitHub</text>
+<text x="398" y="776.0" font-size="11.5" fill="#5b6573">blocks · template · site settings · PR checks</text>
+<rect x="330" y="800" width="480" height="52" fill="#fff" stroke="#e7157b" stroke-width="2"/>
+<rect x="330" y="800" width="52" height="52" fill="#e7157b"/>
+<g transform="translate(334 804) scale(1.1)"><rect x="5" y="15" width="10" height="10" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><rect x="25" y="6" width="10" height="10" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><rect x="25" y="24" width="10" height="10" rx="2" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M15,20 h5 v-9 h5 M20,20 v9 h5" fill="none" stroke="#fff" stroke-width="2"/></g>
+<text x="398" y="824.0" font-size="16" fill="#1b1f24">APIs — SAP Forms service</text>
+<text x="398" y="841.0" font-size="11.5" fill="#5b6573">registration form, dropdowns, consents → CRM (submit stubbed today)</text>
+<circle cx="139" cy="757" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M125,783 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="161" cy="757" r="8" fill="none" stroke="#1b1f24" stroke-width="2"/><path d="M147,783 a14,13 0 0 1 28,0" fill="none" stroke="#1b1f24" stroke-width="2"/>
+<circle cx="150" cy="769" r="8" fill="#fff" stroke="#1b1f24" stroke-width="2"/><path d="M136,795 a14,13 0 0 1 28,0" fill="#fff" stroke="#1b1f24" stroke-width="2"/>
+<text x="150" y="813" text-anchor="middle" font-size="13" fill="#1b1f24">Developers</text>
+<text x="150" y="828" text-anchor="middle" font-size="10.5" fill="#5b6573">blocks, template</text>
+<polyline points="215,168 215,283" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<polyline points="470,168 470,283" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<polyline points="640,168 640,225 520,225 520,283" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<polyline points="875,168 875,283" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<polyline points="1355,168 1355,193" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<polyline points="570,425 613,425" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<text x="591" y="415" text-anchor="middle" font-size="11.5" fill="#1b1f24" stroke="#fff" stroke-width="4" paint-order="stroke">Preview / Publish</text>
+<polyline points="1081,425 1168,425" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<text x="1125" y="415" text-anchor="middle" font-size="11.5" fill="#1b1f24" stroke="#fff" stroke-width="4" paint-order="stroke">origin</text>
+<polyline points="810,760 880,760 880,597" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<text x="888" y="705" text-anchor="start" font-size="11.5" fill="#1b1f24" stroke="#fff" stroke-width="4" paint-order="stroke">AEM Code Sync</text>
+<polyline points="200,778 200,760 328,760" fill="none" stroke="#1b1f24" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+<polyline points="1365,692 1365,826 812,826" fill="none" stroke="#d97706" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ahp)"/>
+<text x="1357" y="818" text-anchor="end" font-size="11.5" fill="#d97706" stroke="#fff" stroke-width="4" paint-order="stroke">registration: visitor&#x27;s browser → SAP Forms</text>
+<polyline points="300,666 300,826 328,826" fill="none" stroke="#d97706" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ahp)"/>
+<text x="290" y="700" text-anchor="end" font-size="11.5" fill="#d97706" stroke="#fff" stroke-width="4" paint-order="stroke">server-side calls</text>
+</svg>
+  <div class="legend"><span><span class="k"></span>Interaction</span><span><span class="k plan"></span>Planned / to build</span></div>
+</div>
+</body>
+</html>
