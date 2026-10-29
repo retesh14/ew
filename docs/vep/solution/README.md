@@ -13,28 +13,29 @@ depend on them. Each file follows [`_template.md`](_template.md) and moves throu
 | CDN | Akamai | `server: AkamaiGHost` on www.sap.com and events.sap.com |
 | Search | SAP Intelligent Search (`search.sap.com`, UI5 web components on SAP BTP) backed by Coveo | requests to `*.org.coveo.com` |
 | Tags | Adobe Launch (`_satellite`), `adobeDataLayer` | page globals |
-| Analytics | Adobe Analytics via AppMeasurement (`s`), `smetrics.sap.com`; Web SDK (`alloy`) not present | page globals, requests |
+| Analytics | Adobe Analytics via AppMeasurement (`s`), `smetrics.sap.com`. events.sap.com: no Web SDK. www.sap.com/events.html: Web SDK (`alloy`) alongside AppMeasurement | page globals, requests |
 | Other martech | Adobe Target, Marketo (Munchkin), Microsoft Clarity, Meta pixels | requests |
 | Consent | TrustArc | `consent.trustarc.com`, `truste` global |
+| URLs | Edge Delivery does not serve page URLs ending in `.html` (404) — legacy `…/en_us/home.html` addresses need redirects | tested on our site |
 | Registration | Shared Form.io form on `forms.services.sap.com` → CRM | registration page requests |
 
 ## Topics
 
 | # | Topic | Group | Native in EW / EDS? | Depends on | Status |
 |---|---|---|---|---|---|
-| [01](01-cdn-configuration.md) | CDN configuration (Akamai) | Platform | Partly — Adobe documents Akamai setup | — | not started |
+| [01](01-cdn-configuration.md) | CDN configuration (Akamai) | Platform | Partly — Adobe documents Akamai setup | — | draft |
 | [02](02-authentication-session.md) | Authentication / session propagation | Identity | Partly — IMS for authors; visitors via CUG + edge | 01 | draft |
 | [03](03-user-management-groups.md) | User management / groups provisioning | Identity | Partly — path ACLs native; lifecycle needs scripting | 02 | draft |
-| [04](04-consent-management.md) | Consent management (TrustArc) | Data & privacy | No — client tag integration | — | not started |
-| [05](05-analytics.md) | Analytics (Adobe Analytics, RUM) | Data & privacy | Partly — RUM built in; Launch is ours | 04 | not started |
-| [06](06-aep-cja-cdp.md) | AEP, CJA, Real-Time CDP | Data & privacy | No — data collection design | 04, 05 | not started |
-| [07](07-b2b-ajo.md) | B2B Journey Optimizer | Marketing | No — integration | 06, 08 | not started |
-| [08](08-registration.md) | Registration | Experience | No — SAP Forms (Form.io) integration | 02, 04 | not started |
-| [09](09-integrations.md) | Integrations (IDS, CTT, SAC, ON24, Plan2Meet, onsite, Form.io, CSC) | Integrations | No — App Builder pattern | 02, 08 | not started |
-| [10](10-assets-dynamic-media.md) | AEM Assets with Dynamic Media | Content | Yes — EW supports AEM Assets | — | not started |
-| [11](11-translation-strategy.md) | Translation strategy | Content | Yes — EW Translate + Rollout (PoC done) | 10 | not started |
-| [12](12-search.md) | Search integration (Coveo / SAP Intelligent Search) | Experience | Partly — query index native; Coveo is ours | 01 | not started |
-| [13](13-semaphore.md) | Semaphore (taxonomy / tagging) | Content | No — integration | 10, 12 | not started |
+| [04](04-consent-management.md) | Consent management (TrustArc) | Data & privacy | No — client tag integration | — | draft |
+| [05](05-analytics.md) | Analytics (Adobe Analytics, RUM) | Data & privacy | Partly — RUM built in; Launch is ours | 04 | draft |
+| [06](06-aep-cja-cdp.md) | AEP, CJA, Real-Time CDP | Data & privacy | No — data collection design | 04, 05 | draft |
+| [07](07-b2b-ajo.md) | B2B Journey Optimizer | Marketing | No — integration | 06, 08 | draft |
+| [08](08-registration.md) | Registration | Experience | No — SAP Forms (Form.io) integration | 02, 04 | draft |
+| [09](09-integrations.md) | Integrations (IDS, CTT, SAC, ON24, Plan2Meet, onsite, Form.io, CSC) | Integrations | No — App Builder pattern | 02, 08 | on hold — client to clarify systems |
+| [10](10-assets-dynamic-media.md) | AEM Assets with Dynamic Media | Content | Yes — EW supports AEM Assets | — | draft |
+| [11](11-translation-strategy.md) | Translation strategy | Content | Yes — EW Translate + Rollout (PoC done) | 10 | draft |
+| [12](12-search.md) | Search integration (Coveo / SAP Intelligent Search) | Experience | Partly — query index native; Coveo is ours | 01 | draft |
+| [13](13-semaphore.md) | Semaphore (taxonomy / auto-tagging, translation-related) | Content / translation | No — integration | 11, 12 | draft |
 | [14](14-right-to-left.md) | Right-to-left languages | Experience | Yes — engine sets `dir`; CSS work needed | 11 | draft |
 
 ## Cross-cutting principles (apply to every topic)
